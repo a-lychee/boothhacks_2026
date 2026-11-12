@@ -12,7 +12,7 @@
      =========================================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400;1,6..72,500&family=Manrope:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&family=Onest:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 
 <style>
 /* ===========================================
@@ -411,274 +411,250 @@ body.presenter-mode .presenter {
 .slide.visible .hx-sync { transform: translate(-50%, -50%) scale(1); }
 .slide.visible .hx-need { transform: scale(1); }
 
-/* ---------- Hero comparison (used by some themes) ---------- */
-.hx-hero .h-fig { display: block; font-family: var(--f-display); line-height: .9; font-variant-numeric: tabular-nums; }
-.hx-hero .h-cap { display: block; font-size: 22px; color: var(--muted); }
-.hx-hero .h-arrow { position: relative; overflow: hidden; }
-.hx-hero .h-arrow::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--line); }
-.hx-hero .h-arrow i {
-    position: absolute; top: 50%; left: 0; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%;
-    background: var(--accent); opacity: 0;
-}
-.slide.visible .hx-hero .h-arrow i { animation: hx-travel 2.4s var(--ease) .9s infinite; }
-@keyframes hx-travel { 0% { left: 0; opacity: 0; } 15% { opacity: 1; } 80% { opacity: 1; } 100% { left: calc(100% - 12px); opacity: 0; } }
-
-
 /* =====================================================
-   THEME 1 · KEYNOTE LIGHT
-   Apple product page: white, two-tone headline, gray bento cards.
+   ROUND 4 · FIVE DISTINCT CONCEPTS
+   Same story on every slide, five different layouts and
+   ways of visualizing it. Shared chrome first.
    ===================================================== */
-.slide[data-theme="keylight"] {
-    --bg: #ffffff; --ink: #1d1d1f; --muted: #6e6e73; --accent: #0071e3;
-    --line: #d2d2d7; --dot: #1d1d1f; --card: #f5f5f7;
-    --pill-bg: #1d1d1f; --pill-ink: #fff; --gap-bg: #e8e8ed; --note-bg: var(--card);
-    --f-display: 'Instrument Sans', sans-serif; --f-body: 'Instrument Sans', sans-serif;
-}
-.slide[data-theme="keylight"] .hx {
-    padding: 76px 132px 60px;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto auto 1fr;
-    grid-template-areas: "chrome" "kicker" "title" "tl" "stats" "foot";
-}
-.slide[data-theme="keylight"] .hx-kicker { margin-top: 58px; margin-bottom: 18px; font-size: 22px; }
-.slide[data-theme="keylight"] .hx-title { font-size: 78px; font-weight: 700; line-height: 1.04; letter-spacing: -0.045em; max-width: 1640px; }
-.slide[data-theme="keylight"] .hx-tl { margin-top: 48px; padding: 30px 8px 26px 44px; background: var(--card); border-radius: 36px; }
-.slide[data-theme="keylight"] .hx-stats { margin-top: 20px; gap: 20px; }
-.slide[data-theme="keylight"] .hx-stat { padding: 30px 36px; background: var(--card); border-radius: 30px; }
-.slide[data-theme="keylight"] .hx-num { font-size: 76px; font-weight: 700; letter-spacing: -0.05em; }
-.slide[data-theme="keylight"] .hx-stat p { margin-top: 10px; font-size: 22px; line-height: 1.3; color: var(--muted); }
-.slide[data-theme="keylight"] .hx-stat small { display: none; }
+.ch { display: flex; justify-content: space-between; align-items: center; font-size: 19px; color: var(--muted); }
+.ch .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); font-weight: 600; }
+.ch .mk { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); }
+.kick { margin: 0; font-size: 20px; font-weight: 600; color: var(--accent); }
+.ttl { margin: 0; font-family: var(--f-display); }
+.ttl .t2 { color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+.slide[data-theme] .reveal.pop { transform: translateY(26px) scale(.97); }
+.slide.visible .reveal.pop { transform: none; }
 
-/* =====================================================
-   THEME 2 · KEYNOTE DARK
-   Apple event stage: black, centered, one giant comparison,
-   warm gradient on the key figure.
-   ===================================================== */
-.slide[data-theme="keydark"] {
-    --bg: #000000; --ink: #f5f5f7; --muted: #86868b; --accent: #ff9f6e;
-    --line: #2c2c2e; --dot: #f5f5f7; --pill-bg: #f5f5f7; --pill-ink: #000; --gap-bg: #1c1c1e;
-    --grad: linear-gradient(100deg, #ffd3a5 0%, #ff9f6e 45%, #ff6f61 100%);
-    --f-display: 'Hanken Grotesk', sans-serif; --f-body: 'Hanken Grotesk', sans-serif;
+/* -----------------------------------------------------
+   A · BENTO — Apple WWDC-style tile grid, one hero color tile
+   ----------------------------------------------------- */
+.slide[data-theme="bento"] {
+    --bg: #efeee9; --ink: #141416; --muted: #6b6b72; --accent: #ff5a3c;
+    --line: #e1dfd9; --dot: #141416; --pill-bg: #141416; --pill-ink: #fff; --gap-bg: #f3f2ee;
+    --f-display: 'Plus Jakarta Sans', sans-serif; --f-body: 'Plus Jakarta Sans', sans-serif;
 }
-.slide[data-theme="keydark"] .hx-deco { background: radial-gradient(ellipse 60% 45% at 50% 58%, rgba(255,140,90,.10), transparent 70%); }
-.slide[data-theme="keydark"] .hx {
-    padding: 76px 140px 60px; text-align: center;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto 1fr auto auto;
-    grid-template-areas: "chrome" "kicker" "title" "hero" "stats" "foot";
+.bn { position: absolute; inset: 0; padding: 48px 60px 56px; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: 44px 320px 1fr 220px; gap: 20px; }
+.bn .ch { grid-column: 1 / -1; }
+.bn .tile { position: relative; overflow: hidden; border-radius: 34px; background: #fff; padding: 38px 44px; }
+.bn .t-head { grid-column: 1 / 4; grid-row: 2; display: flex; flex-direction: column; justify-content: space-between; }
+.bn .kick { font-size: 19px; font-weight: 700; }
+.bn .ttl { font-size: 58px; font-weight: 800; line-height: 1.06; letter-spacing: -0.04em; }
+.bn .t-seven {
+    grid-column: 4; grid-row: 2 / 4; color: #fff; display: flex; flex-direction: column;
+    background: radial-gradient(circle at 85% 8%, rgba(255,190,130,.9) 0%, transparent 42%), linear-gradient(165deg, #ff7a4d, #ff4f38 55%, #e23d2c);
 }
-.slide[data-theme="keydark"] .hx-tl { display: none; }
-.slide[data-theme="keydark"] .hx-mark { background: var(--grad); }
-.slide[data-theme="keydark"] .hx-kicker { margin-top: 66px; margin-bottom: 20px; font-size: 24px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; justify-self: center; }
-.slide[data-theme="keydark"] .hx-title { font-size: 68px; font-weight: 700; line-height: 1.08; letter-spacing: -0.035em; max-width: 1300px; justify-self: center; }
-.slide[data-theme="keydark"] .hx-hero { display: grid; grid-template-columns: 1fr 260px 1fr; align-items: center; align-self: center; gap: 40px; }
-.slide[data-theme="keydark"] .h-fig small { display: none; }
-.slide[data-theme="keydark"] .h-fig { white-space: nowrap; font-size: 220px; font-weight: 800; letter-spacing: -0.06em; }
-.slide[data-theme="keydark"] .h-a .h-fig { color: #3a3a3c; }
-.slide[data-theme="keydark"] .h-b .h-fig { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: 8px; }
-.slide[data-theme="keydark"] .h-cap { margin-top: 18px; }
-.slide[data-theme="keydark"] .h-arrow { height: 40px; }
-.slide[data-theme="keydark"] .hx-stats { gap: 0; margin-bottom: 36px; }
-.slide[data-theme="keydark"] .hx-stat { padding: 4px 40px; border-left: 1px solid #2c2c2e; }
-.slide[data-theme="keydark"] .hx-stat:first-child { border-left: 0; }
-.slide[data-theme="keydark"] .hx-num { font-size: 60px; font-weight: 700; letter-spacing: -0.04em; }
-.slide[data-theme="keydark"] .hx-stat p { margin-top: 10px; font-size: 20px; color: var(--muted); }
-.slide[data-theme="keydark"] .hx-stat small { display: none; }
-.slide[data-theme="keydark"] .hx-foot { justify-content: center; gap: 40px; }
+.bn .t-seven .lbl { font-size: 19px; font-weight: 700; opacity: .85; }
+.bn .t-seven .big { margin-top: auto; font-size: 330px; font-weight: 800; line-height: .74; letter-spacing: -0.07em; margin-left: -14px; }
+.bn .t-seven .unit { font-size: 88px; font-weight: 800; letter-spacing: -0.05em; line-height: 1; margin-top: 18px; }
+.bn .t-seven p { margin: 20px 0 0; font-size: 21px; line-height: 1.35; opacity: .92; }
+.bn .t-tl { grid-column: 1 / 4; grid-row: 3; display: flex; flex-direction: column; justify-content: center; padding: 22px 10px 18px 40px; --label-w: 200px; --pad: 44px; }
+.bn .t-stat { grid-row: 4; display: flex; flex-direction: column; justify-content: space-between; }
+.bn .t-stat .num { font-size: 76px; font-weight: 800; letter-spacing: -0.05em; line-height: 1; }
+.bn .t-stat p { margin: 0; font-size: 20px; line-height: 1.3; color: #3b3b40; }
+.bn .s1 { background: #e9e5ff; } .bn .s2 { background: #dcf2e8; } .bn .s3 { background: #fbeecb; }
+.bn .t-hook { grid-column: 4; grid-row: 4; background: #141416; color: #fff; display: flex; flex-direction: column; justify-content: space-between; }
+.bn .t-hook p { margin: 0; padding-right: 58px; font-size: 25px; font-weight: 700; line-height: 1.22; letter-spacing: -0.02em; }
+.bn .t-hook small { font-size: 13px; opacity: .45; }
+.bn .t-hook .arw { position: absolute; right: 30px; top: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; font-size: 24px; }
 
-/* =====================================================
-   THEME 3 · MAGAZINE
-   Print feature spread: warm paper, oversized serif headline,
-   figures run down a side column, hairline rules, one spot color.
-   ===================================================== */
-.slide[data-theme="magazine"] {
-    --bg: #f3efe6; --ink: #1a1917; --muted: #6d675d; --accent: #c4532e;
-    --line: #1a1917; --dot: #1a1917; --pill-bg: #1a1917; --pill-ink: #f3efe6; --gap-bg: transparent;
-    --pill-radius: 0; --gap-radius: 0;
-    --f-display: 'Instrument Serif', Georgia, serif; --f-body: 'Figtree', sans-serif;
+/* -----------------------------------------------------
+   B · AURORA — dark glass, drifting aurora light, vertical week
+   ----------------------------------------------------- */
+.slide[data-theme="aurora"] {
+    --bg: #080a12; --ink: #f2f3f7; --muted: rgba(242,243,247,.56); --accent: #ffb27a;
+    --grad: linear-gradient(90deg, #86f0cf, #8fb4ff);
+    --f-display: 'Sora', sans-serif; --f-body: 'Sora', sans-serif;
 }
-.slide[data-theme="magazine"] .hx {
-    padding: 64px 120px 52px; column-gap: 96px;
-    grid-template-columns: 1fr 460px;
-    grid-template-rows: auto auto auto 1fr auto;
-    grid-template-areas: "chrome chrome" "kicker kicker" "title stats" "tl tl" "foot foot";
-}
-.slide[data-theme="magazine"] .hx-chrome { padding-bottom: 18px; border-bottom: 1.5px solid var(--ink); font-size: 16px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--ink); }
-.slide[data-theme="magazine"] .hx-mark { display: none; }
-.slide[data-theme="magazine"] .hx-brand { font-family: var(--f-display); font-size: 34px; letter-spacing: -0.01em; text-transform: none; font-weight: 400; }
-.slide[data-theme="magazine"] .hx-kicker { margin: 44px 0 22px; font-size: 16px; letter-spacing: .18em; text-transform: uppercase; }
-.slide[data-theme="magazine"] .hx-title { font-size: 122px; font-weight: 400; line-height: .98; letter-spacing: -0.02em; }
-.slide[data-theme="magazine"] .hx-title em { font-style: italic; color: var(--accent); }
-.slide[data-theme="magazine"] .hx-title .t2 { color: var(--ink); }
-.slide[data-theme="magazine"] .hx-stats { grid-template-columns: 1fr; gap: 0; align-self: start; border-top: 1px solid rgba(26,25,23,.25); }
-.slide[data-theme="magazine"] .hx-stat { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 20px; padding: 22px 0; border-bottom: 1px solid rgba(26,25,23,.25); }
-.slide[data-theme="magazine"] .hx-num { font-size: 92px; letter-spacing: -0.03em; }
-.slide[data-theme="magazine"] .hx-stat p { font-size: 20px; line-height: 1.35; }
-.slide[data-theme="magazine"] .hx-stat small { display: none; }
-.slide[data-theme="magazine"] .hx-tl { align-self: end; --label-w: 240px; }
-.slide[data-theme="magazine"] .hx-row { border-top: 1px solid rgba(26,25,23,.25); height: 74px; }
-.slide[data-theme="magazine"] .hx-label b { font-family: var(--f-display); font-weight: 400; font-size: 30px; }
-.slide[data-theme="magazine"] .hx-line { height: 1px; }
-.slide[data-theme="magazine"] .hx-dot { width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; }
-.slide[data-theme="magazine"] .hx-gap { font-style: italic; font-family: var(--f-display); font-size: 22px; color: var(--ink); background: var(--bg); left: 12%; right: 14%; }
-.slide[data-theme="magazine"] .hx-sync { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; padding: 7px 12px; }
-.slide[data-theme="magazine"] .hx-need { border-radius: 0; transform: rotate(45deg) scale(0); }
-.slide[data-theme="magazine"].visible .hx-need { transform: rotate(45deg) scale(1); }
-.slide[data-theme="magazine"] .hx-need::after { border-radius: 0; }
-.slide[data-theme="magazine"] .hx-note { font-family: var(--f-display); font-style: italic; font-size: 20px; }
-.slide[data-theme="magazine"] .hx-foot { margin-top: 22px; font-size: 14px; letter-spacing: .06em; }
-
-/* =====================================================
-   THEME 4 · COLOR BLOCK
-   Modern business-magazine cover: a butter-yellow panel carries
-   one enormous number; the story runs on the right.
-   ===================================================== */
-.slide[data-theme="block"] {
-    --bg: #fbfaf6; --ink: #121212; --muted: #5d5a52; --accent: #121212; --panel: #f1df8e;
-    --line: #d9d5ca; --dot: #121212; --pill-bg: #121212; --pill-ink: #fff; --gap-bg: #f1eee6;
-    --f-display: 'Schibsted Grotesk', sans-serif; --f-body: 'Schibsted Grotesk', sans-serif; --f-serif: 'Newsreader', Georgia, serif;
-}
-.slide[data-theme="block"] .hx-deco::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 640px; background: var(--panel); }
-.slide[data-theme="block"] .hx {
-    padding: 68px 104px 56px 76px; column-gap: 140px;
-    grid-template-columns: 484px 1fr;
-    grid-template-rows: auto auto 1fr auto auto;
-    grid-template-areas: "chrome chrome" "kicker title" "hero tl" "hero stats" "foot foot";
-}
-.slide[data-theme="block"] .hx-chrome { font-size: 17px; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: .1em; }
-.slide[data-theme="block"] .hx-mark { border-radius: 0; background: var(--ink); }
-.slide[data-theme="block"] .hx-kicker { margin-top: 64px; font-size: 18px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-.slide[data-theme="block"] .hx-title { margin-top: 58px; font-size: 56px; font-weight: 700; line-height: 1.06; letter-spacing: -0.035em; }
-.slide[data-theme="block"] .hx-title em { font-family: var(--f-serif); font-style: italic; font-weight: 400; letter-spacing: -0.02em; }
-.slide[data-theme="block"] .hx-title .t2 { color: var(--ink); }
-.slide[data-theme="block"] .hx-hero { display: block; align-self: end; padding-bottom: 6px; }
-.slide[data-theme="block"] .h-a, .slide[data-theme="block"] .h-arrow { display: none; }
-.slide[data-theme="block"] .h-fig { font-weight: 900; letter-spacing: -0.06em; white-space: nowrap; }
-.slide[data-theme="block"] .h-fig .n { display: block; font-size: 440px; line-height: .78; margin-left: -18px; }
-.slide[data-theme="block"] .h-fig .u, .slide[data-theme="block"] .h-fig small { font-size: 104px; letter-spacing: -0.05em; }
-.slide[data-theme="block"] .h-cap { margin-top: 30px; max-width: 420px; font-family: var(--f-serif); font-style: italic; font-size: 30px; line-height: 1.25; color: var(--ink); }
-.slide[data-theme="block"] .hx-tl { align-self: center; --label-w: 200px; --pad: 40px; }
-.slide[data-theme="block"] .hx-row { border-top: 1px solid var(--line); height: 80px; }
-.slide[data-theme="block"] .hx-row:last-of-type { border-bottom: 1px solid var(--line); }
-.slide[data-theme="block"] .hx-label b { font-size: 22px; }
-.slide[data-theme="block"] .hx-gap { font-size: 16px; }
-.slide[data-theme="block"] .hx-need { background: #121212; box-shadow: 0 0 0 5px var(--panel); }
-.slide[data-theme="block"] .hx-need::after { border-color: #121212; }
-.slide[data-theme="block"] .hx-stats { gap: 36px; padding-top: 30px; }
-.slide[data-theme="block"] .hx-stat { border-top: 4px solid var(--ink); padding-top: 20px; }
-.slide[data-theme="block"] .hx-num { font-size: 68px; font-weight: 800; letter-spacing: -0.05em; }
-.slide[data-theme="block"] .hx-stat p { margin-top: 10px; font-size: 19px; line-height: 1.35; color: var(--muted); }
-.slide[data-theme="block"] .hx-stat small { display: none; }
-.slide[data-theme="block"] .hx-foot { margin-top: 34px; color: var(--ink); font-size: 14px; }
-
-/* =====================================================
-   THEME 5 · SOFT GLASS
-   Calm macOS / visionOS feel: warm gray canvas, soft color
-   light behind frosted cards.
-   ===================================================== */
-.slide[data-theme="glass"] {
-    --bg: #eeebe6; --ink: #16181d; --muted: #5f6470; --accent: #e5603e;
-    --line: rgba(22,24,29,.14); --dot: #16181d; --pill-bg: #16181d; --pill-ink: #fff; --gap-bg: rgba(255,255,255,.7);
-    --glass: rgba(255,255,255,.55); --note-bg: transparent;
-    --f-display: 'Manrope', sans-serif; --f-body: 'Manrope', sans-serif;
-}
-.slide[data-theme="glass"] .hx-deco {
+.au-glow {
+    position: absolute; inset: -10%; filter: blur(70px);
     background:
-        radial-gradient(circle at 12% 18%, rgba(255,176,138,.75), transparent 34%),
-        radial-gradient(circle at 92% 88%, rgba(146,186,255,.7), transparent 36%),
-        radial-gradient(circle at 70% 8%, rgba(170,222,205,.6), transparent 30%);
-    filter: blur(40px);
+        radial-gradient(circle at 18% 22%, rgba(70,210,170,.42), transparent 30%),
+        radial-gradient(circle at 82% 12%, rgba(90,130,255,.40), transparent 32%),
+        radial-gradient(circle at 70% 92%, rgba(255,140,90,.26), transparent 30%);
 }
-.slide[data-theme="glass"] .hx {
-    padding: 72px 120px 56px; column-gap: 28px;
-    grid-template-columns: 1fr 460px;
-    grid-template-rows: auto auto auto 1fr auto;
-    grid-template-areas: "chrome chrome" "kicker kicker" "title title" "tl stats" "foot foot";
+.slide.visible .au-glow { animation: au-drift 14s ease-in-out infinite alternate; }
+@keyframes au-drift { to { transform: translate3d(3%, -3%, 0) scale(1.07); } }
+.au { position: absolute; inset: 0; padding: 60px 96px 56px; display: grid; grid-template-columns: 760px 1fr; grid-template-rows: 40px 1fr; column-gap: 72px; row-gap: 40px; }
+.au .ch { grid-column: 1 / -1; }
+.au .ch .mk { background: var(--grad); }
+.au .left { display: flex; flex-direction: column; min-height: 0; }
+.au .kick { align-self: flex-start; padding: 9px 18px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); font-size: 18px; color: #86f0cf; }
+.au .ttl { margin-top: 34px; font-size: 64px; font-weight: 600; line-height: 1.1; letter-spacing: -0.04em; }
+.au .stats { margin-top: auto; }
+.au .st { display: grid; grid-template-columns: 190px 1fr; align-items: center; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.1); }
+.au .st .num { font-size: 62px; font-weight: 600; letter-spacing: -0.05em; line-height: 1.05; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.au .st p { margin: 0; font-size: 20px; color: var(--muted); line-height: 1.35; }
+.au .src { margin-top: 14px; font-size: 14px; color: rgba(242,243,247,.35); }
+.au .glass {
+    position: relative; border-radius: 36px; padding: 26px 36px 30px;
+    background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.11);
+    backdrop-filter: blur(30px) saturate(1.3); -webkit-backdrop-filter: blur(30px) saturate(1.3);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 40px 80px rgba(0,0,0,.35);
 }
-.slide[data-theme="glass"] .hx-mark { background: linear-gradient(135deg, #ffb08a, #92baff); width: 18px; height: 18px; }
-.slide[data-theme="glass"] .hx-kicker {
-    justify-self: start; margin: 60px 0 22px; padding: 9px 18px; border-radius: 999px; font-size: 18px;
-    background: var(--glass); border: 1px solid rgba(255,255,255,.8); backdrop-filter: blur(20px);
+.wk { position: relative; height: 100%; display: grid; grid-template-columns: 130px 1fr 1fr; grid-template-rows: 44px repeat(8, 1fr); column-gap: 24px; }
+.wk .hd { align-self: center; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.wk .d, .wk .h, .wk .lc { border-top: 1px solid rgba(255,255,255,.07); display: flex; align-items: center; }
+.wk .d { font-size: 20px; color: var(--muted); }
+.wk .d.nx { color: var(--ink); font-weight: 600; }
+.wk .h { gap: 12px; }
+.wk .h i { width: 12px; height: 12px; border-radius: 50%; background: rgba(242,243,247,.85); transform: scale(0); transition: transform .4s var(--ease); transition-delay: calc(.4s + var(--r) * .09s); }
+.slide.visible .wk .h i { transform: scale(1); }
+.wk .lc { gap: 10px; }
+.wk .chip { padding: 7px 15px; border-radius: 999px; font-size: 15px; font-weight: 600; white-space: nowrap; }
+.wk .chip.sync { background: #f2f3f7; color: #080a12; }
+.wk .chip.mail { background: rgba(134,240,207,.12); color: #86f0cf; }
+.wk .chip.need { background: rgba(255,178,122,.14); color: var(--accent); }
+.wk .need-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 22px 4px rgba(255,178,122,.55); }
+.slide.visible .wk .need-dot { animation: au-pulse 1.6s ease-in-out 2.2s infinite; }
+@keyframes au-pulse { 50% { box-shadow: 0 0 34px 10px rgba(255,178,122,.75); } }
+.wk .bar {
+    position: absolute; grid-column: 3; grid-row: 3 / 9; inset: 8px 0;
+    border-radius: 22px; border: 1px dashed rgba(255,255,255,.18);
+    background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.015));
+    display: grid; place-items: center; text-align: center; padding: 24px; font-size: 18px; line-height: 1.5; color: var(--muted);
+    transform-origin: top; transform: scaleY(0); transition: transform 1.2s var(--ease) .9s;
 }
-.slide[data-theme="glass"] .hx-title { font-size: 76px; font-weight: 700; line-height: 1.05; letter-spacing: -0.045em; max-width: 1500px; }
-.slide[data-theme="glass"] .hx-tl,
-.slide[data-theme="glass"] .hx-stat {
-    background: var(--glass); border: 1px solid rgba(255,255,255,.85);
-    backdrop-filter: blur(28px) saturate(1.2); -webkit-backdrop-filter: blur(28px) saturate(1.2);
-    box-shadow: 0 24px 60px rgba(40,40,70,.08);
-}
-.slide[data-theme="glass"] .hx-tl { margin-top: 50px; align-self: stretch; padding: 34px 4px 28px 40px; border-radius: 32px; --label-w: 210px; --pad: 44px; display: flex; flex-direction: column; justify-content: center; }
-.slide[data-theme="glass"] .hx-label b { font-size: 22px; }
-.slide[data-theme="glass"] .hx-gap { font-size: 16px; }
-.slide[data-theme="glass"] .hx-stats { margin-top: 50px; grid-template-columns: 1fr; gap: 16px; }
-.slide[data-theme="glass"] .hx-stat { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 14px; padding: 22px 28px; border-radius: 26px; }
-.slide[data-theme="glass"] .hx-num { font-size: 58px; font-weight: 800; letter-spacing: -0.05em; }
-.slide[data-theme="glass"] .hx-stat p { font-size: 19px; line-height: 1.3; color: var(--muted); }
-.slide[data-theme="glass"] .hx-stat small { display: none; }
-.slide[data-theme="glass"] .hx-foot { margin-top: 26px; }
+.wk .bar b { display: block; font-size: 34px; color: var(--ink); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 6px; }
+.slide.visible .wk .bar { transform: none; }
 
-/* =====================================================
-   ROUND 3 · HYBRIDS between Keynote Light (1) and Soft Glass (5)
-   Variants layer on top of a base theme via data-variant.
-   ===================================================== */
-
-/* --- Hybrid A · Light + Glow: Keynote layout, soft glows, frosted cards --- */
-.slide[data-variant="glow"] { --accent: #e5603e; --card: rgba(245,245,247,.72); --gap-bg: #f7f7f8; }
-.slide[data-variant="glow"] .hx-deco {
+/* -----------------------------------------------------
+   C · MESH — full-bleed grainy mesh gradient + product-UI card
+   ----------------------------------------------------- */
+.slide[data-theme="mesh"] {
+    --bg: #f2d8cd; --ink: #1c1626; --muted: rgba(28,22,38,.58); --accent: #e5533a;
+    --f-display: 'Bricolage Grotesque', sans-serif; --f-body: 'Instrument Sans', sans-serif;
+}
+.ms-bg {
+    position: absolute; inset: 0;
     background:
-        radial-gradient(circle at 88% 14%, rgba(255,176,138,.55), transparent 30%),
-        radial-gradient(circle at 6% 92%, rgba(146,186,255,.45), transparent 32%),
-        radial-gradient(circle at 55% 62%, rgba(170,222,205,.28), transparent 28%);
-    filter: blur(50px);
+        radial-gradient(at 6% 6%, #ffbf9c 0, transparent 46%),
+        radial-gradient(at 94% 4%, #c6d3ff 0, transparent 46%),
+        radial-gradient(at 97% 96%, #b1e0cf 0, transparent 46%),
+        radial-gradient(at 3% 97%, #f5c2d1 0, transparent 46%),
+        radial-gradient(at 55% 50%, #f7e3cc 0, transparent 55%),
+        #f2d8cd;
 }
-.slide[data-variant="glow"] .hx-mark { background: linear-gradient(135deg, #ffb08a, #92baff); }
-.slide[data-variant="glow"] .hx-tl,
-.slide[data-variant="glow"] .hx-stat {
-    border: 1px solid rgba(255,255,255,.9);
-    backdrop-filter: blur(26px) saturate(1.2); -webkit-backdrop-filter: blur(26px) saturate(1.2);
-    box-shadow: 0 18px 50px rgba(40,40,70,.06);
+.ms-grain {
+    position: absolute; inset: 0; opacity: .22; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
+.ms { position: absolute; inset: 0; padding: 60px 104px 56px; display: grid; grid-template-columns: 1fr 640px; grid-template-rows: 40px 1fr auto; column-gap: 88px; }
+.ms .ch { grid-column: 1 / -1; color: var(--ink); }
+.ms .ch .mk { background: var(--ink); }
+.ms .left { grid-row: 2; display: flex; flex-direction: column; justify-content: center; }
+.ms .kick { color: var(--ink); opacity: .7; }
+.ms .ttl { margin-top: 24px; font-size: 88px; font-weight: 800; line-height: 1; letter-spacing: -0.035em; }
+.ms .ttl .t2 { color: rgba(28,22,38,.42); }
+.ms .right { grid-row: 2; position: relative; align-self: center; height: 580px; }
+.ms .card { position: absolute; left: 0; right: 0; border-radius: 32px; padding: 32px 38px; background: rgba(255,255,255,.92); box-shadow: 0 40px 90px rgba(70,30,60,.18); }
+.ms .card.back { top: 0; transform-origin: left bottom; rotate: -4deg; translate: -22px 0; background: rgba(255,255,255,.55); box-shadow: 0 20px 50px rgba(70,30,60,.10); }
+.ms .card.front { top: 120px; }
+.ms .row-h { display: flex; align-items: center; gap: 18px; }
+.ms .ico { flex: none; width: 60px; height: 60px; border-radius: 16px; display: grid; place-items: center; font-family: var(--f-display); font-weight: 800; }
+.ms .ico.ico-cal { background: #fff; box-shadow: inset 0 0 0 1.5px #ece6ea; flex-direction: column; line-height: 1; font-size: 26px; }
+.ms .ico.ico-cal small { font-size: 11px; color: var(--accent); font-weight: 700; letter-spacing: .08em; margin-bottom: 2px; }
+.ms .ico.ico-mail { background: linear-gradient(135deg, #2b2340, #4a3d66); color: #fff; font-size: 22px; }
+.ms .row-h b { display: block; font-size: 27px; font-weight: 700; letter-spacing: -0.02em; }
+.ms .row-h div span { display: block; margin-top: 2px; font-size: 18px; color: var(--muted); }
+.ms .row-h .ico.ico-cal { display: flex; align-items: center; justify-content: center; }
+.ms .row-h .ico-cal small { display: block; }
+.ms .tag { margin-left: auto; padding: 6px 14px; border-radius: 999px; font-size: 15px; font-weight: 600; background: #efeaee; color: #6d6475; }
+.ms .lines { margin-top: 22px; border-top: 1px solid #efe9ec; }
+.ms .ln { display: flex; justify-content: space-between; align-items: center; padding: 17px 0; border-bottom: 1px solid #efe9ec; font-size: 21px; }
+.ms .ln em { font-style: normal; color: var(--muted); }
+.ms .ln .bad { color: #c8442a; font-weight: 600; }
+.ms .cold { margin-top: 20px; padding: 16px 20px; border-radius: 18px; background: #fff1ec; color: #b43c22; font-size: 21px; font-weight: 600; display: flex; align-items: center; gap: 12px; }
+.ms .cold i { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.slide.visible .ms .cold i { animation: ms-blink 1.4s ease-in-out 2s infinite; }
+@keyframes ms-blink { 50% { opacity: .25; } }
+.ms .pills { grid-row: 3; grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; }
+.ms .pill { display: flex; align-items: baseline; gap: 12px; padding: 14px 24px; border-radius: 999px; background: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.ms .pill .num { font-family: var(--f-display); font-size: 34px; font-weight: 800; letter-spacing: -0.03em; }
+.ms .pill .l { font-size: 18px; color: var(--muted); }
+.ms .src { margin-left: auto; font-size: 14px; color: var(--muted); }
 
-/* --- Hybrid B · Color Moments: Keynote base, gradient headline, tinted stat cards --- */
-.slide[data-variant="color"] { --accent: #e5603e; }
-.slide[data-variant="color"] .hx-mark { background: linear-gradient(135deg, #ff7a59, #ffb347); }
-.slide[data-variant="color"] .hx-title .t2 {
-    background: linear-gradient(90deg, #ff6a4d 0%, #ff9a52 45%, #f6b04c 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
+/* -----------------------------------------------------
+   D · CALENDAR — the week as calendar tiles, the gap as a hatched band
+   ----------------------------------------------------- */
+.slide[data-theme="calendar"] {
+    --bg: #f7f6f2; --ink: #16171b; --muted: #6c6e76; --accent: #ff5a36;
+    --f-display: 'Onest', sans-serif; --f-body: 'Onest', sans-serif;
 }
-.slide[data-variant="color"] .hx-kicker { color: #6e6e73; }
-.slide[data-variant="color"] .hx-stat:nth-child(1) { background: #fff1ea; }
-.slide[data-variant="color"] .hx-stat:nth-child(2) { background: #e9f6f1; }
-.slide[data-variant="color"] .hx-stat:nth-child(3) { background: #eaf0ff; }
-.slide[data-variant="color"] .hx-stat:nth-child(1) .hx-num { color: #d4512c; }
-.slide[data-variant="color"] .hx-stat:nth-child(2) .hx-num { color: #1d7f65; }
-.slide[data-variant="color"] .hx-stat:nth-child(3) .hx-num { color: #2c5fd6; }
-.slide[data-variant="color"] .hx-stat p { color: #3a3a3f; }
+.cal { position: absolute; inset: 0; padding: 60px 104px 52px; display: flex; flex-direction: column; }
+.cal .kick { margin-top: 46px; }
+.cal .ttl { margin-top: 14px; font-size: 66px; font-weight: 700; line-height: 1.07; letter-spacing: -0.04em; }
+.cal .week { position: relative; margin-top: 54px; display: grid; grid-template-columns: 170px repeat(8, 1fr); grid-template-rows: 30px 196px 220px; gap: 14px; }
+.cal .dh { align-self: end; text-align: center; font-size: 18px; color: var(--muted); }
+.cal .dh.nx { color: var(--ink); font-weight: 700; }
+.cal .lane { align-self: center; }
+.cal .lane b { display: block; font-size: 22px; font-weight: 600; }
+.cal .lane small { display: block; margin-top: 2px; font-size: 17px; color: var(--muted); }
+.cal .cell {
+    border-radius: 20px; background: #fff; padding: 12px; display: flex; flex-direction: column; gap: 8px; justify-content: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 10px 24px rgba(20,20,40,.05);
+    opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease);
+    transition-delay: calc(.35s + var(--c) * .06s);
+}
+.slide.visible .cal .cell { opacity: 1; transform: none; }
+.cal .cell.off { background: #edebe5; box-shadow: none; }
+.cal .cell.ghost { visibility: hidden; }
+.cal .cell.hot { box-shadow: 0 0 0 2.5px rgba(255,90,54,.55), 0 18px 40px rgba(255,90,54,.22); }
+.cal .mt { height: 40px; border-radius: 9px; background: #e9eef7; border-left: 4px solid #8ea6d8; }
+.cal .chip { align-self: flex-start; padding: 6px 12px; border-radius: 999px; font-size: 15px; font-weight: 600; white-space: nowrap; }
+.cal .chip.sync { background: var(--ink); color: #fff; }
+.cal .chip.mail { background: #e6f3ec; color: #217a5d; }
+.cal .chip.need { background: #ffe3da; color: #d4401f; }
+.slide.visible .cal .chip.need { animation: cal-pulse 1.6s ease-in-out 2.2s infinite; }
+@keyframes cal-pulse { 50% { box-shadow: 0 0 0 7px rgba(255,90,54,.18); } }
+.cal .band {
+    position: absolute; grid-column: 3 / 9; grid-row: 3; inset: 0;
+    border-radius: 20px; border: 1.5px dashed #d3d0c8;
+    background: repeating-linear-gradient(135deg, #ecebe5 0 12px, #f5f4f0 12px 24px);
+    display: grid; place-items: center; font-size: 20px; color: var(--muted);
+    clip-path: inset(0 100% 0 0); transition: clip-path 1.3s var(--ease) 1s;
+}
+.cal .band b { color: var(--ink); font-weight: 600; }
+.slide.visible .cal .band { clip-path: inset(0 0 0 0); }
+.cal .stats { margin-top: auto; display: flex; gap: 72px; align-items: flex-end; }
+.cal .st { display: flex; align-items: baseline; gap: 16px; }
+.cal .st .num { font-size: 60px; font-weight: 700; letter-spacing: -0.05em; }
+.cal .st p { margin: 0; font-size: 19px; line-height: 1.3; color: var(--muted); max-width: 230px; }
+.cal .src { margin-left: auto; font-size: 14px; color: var(--muted); }
 
-/* --- Hybrid C · Clear Glass: Soft Glass palette, Keynote full-width layout + type --- */
-.slide[data-variant="clear"] {
-    --gap-bg: #fbfaf8; --bg: #f6f5f2; --f-display: 'Instrument Sans', sans-serif; --f-body: 'Instrument Sans', sans-serif;
+/* -----------------------------------------------------
+   E · CURVE — one elegant chart: memory fades as need spikes
+   ----------------------------------------------------- */
+.slide[data-theme="curve"] {
+    --bg: #ffffff; --ink: #111214; --muted: #707279; --accent: #ff5b3a;
+    --f-display: 'Geist', sans-serif; --f-body: 'Geist', sans-serif; --f-mono: 'Geist Mono', monospace;
 }
-.slide[data-variant="clear"] .hx-deco {
-    background:
-        radial-gradient(circle at 4% 10%, rgba(255,176,138,.7), transparent 26%),
-        radial-gradient(circle at 98% 96%, rgba(146,186,255,.65), transparent 30%),
-        radial-gradient(circle at 80% 30%, rgba(170,222,205,.45), transparent 24%);
-}
-.slide[data-variant="clear"] .hx {
-    padding: 76px 132px 60px; column-gap: 0;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto auto 1fr;
-    grid-template-areas: "chrome" "kicker" "title" "tl" "stats" "foot";
-}
-.slide[data-variant="clear"] .hx-kicker { margin: 52px 0 20px; }
-.slide[data-variant="clear"] .hx-title { font-size: 78px; letter-spacing: -0.045em; max-width: 1640px; }
-.slide[data-variant="clear"] .hx-tl { margin-top: 44px; padding: 30px 8px 26px 44px; --label-w: 260px; --pad: 52px; }
-.slide[data-variant="clear"] .hx-stats { margin-top: 20px; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.slide[data-variant="clear"] .hx-stat { display: block; padding: 30px 36px; border-radius: 30px; }
-.slide[data-variant="clear"] .hx-num { font-size: 76px; font-weight: 700; }
-.slide[data-variant="clear"] .hx-stat p { margin-top: 10px; font-size: 22px; }
-.slide[data-variant="clear"] .hx-foot { margin-top: 0; }
+.cv { position: absolute; inset: 0; padding: 60px 112px 52px; display: flex; flex-direction: column; }
+.cv .ch .mk { background: linear-gradient(135deg, #ffb35c, #ff5b3a); }
+.cv .kick { margin-top: 42px; font-family: var(--f-mono); font-size: 17px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+.cv .ttl { margin-top: 16px; font-size: 74px; font-weight: 600; line-height: 1.04; letter-spacing: -0.05em; }
+.cv .chart { position: relative; margin-top: 28px; width: 1696px; height: 440px; }
+.cv .chart svg { position: absolute; inset: 0; width: 1696px; height: 440px; max-width: none; max-height: none; overflow: visible; }
+.cv .draw { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s var(--ease); transition-delay: var(--d, .4s); }
+.slide.visible .cv .draw { stroke-dashoffset: 0; }
+.cv .fade { opacity: 0; transition: opacity .7s ease; transition-delay: var(--d, 1s); }
+.slide.visible .cv .fade { opacity: 1; }
+.cv .day { font-family: var(--f-body); font-size: 17px; fill: var(--muted); }
+.cv .day.nx { fill: var(--ink); font-weight: 600; }
+.cv .lb { position: absolute; font-size: 20px; line-height: 1.3; }
+.cv .lb b { display: block; font-size: 22px; }
+.cv .lb.mem { color: var(--ink); }
+.cv .lb.need { color: var(--accent); text-align: right; }
+.cv .lb.muted { color: var(--muted); }
+.cv .sync { position: absolute; top: 374px; translate: -50% 0; padding: 6px 14px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 15px; font-weight: 600; }
+.cv .pulse { position: absolute; width: 22px; height: 22px; translate: -50% -50%; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(255,91,58,.45); }
+.slide.visible .cv .pulse { animation: cv-pulse 1.8s ease-out 2.8s infinite; }
+@keyframes cv-pulse { 0% { box-shadow: 0 0 0 0 rgba(255,91,58,.45); } 100% { box-shadow: 0 0 0 22px rgba(255,91,58,0); } }
+.cv .stats { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 48px; align-items: end; padding-top: 22px; border-top: 1px solid #ececef; }
+.cv .st { display: flex; align-items: baseline; gap: 18px; }
+.cv .st .num { font-size: 66px; font-weight: 600; letter-spacing: -0.05em; }
+.cv .st p { margin: 0; font-size: 19px; line-height: 1.3; color: var(--muted); max-width: 250px; }
+.cv .src { font-family: var(--f-mono); font-size: 13px; color: var(--muted); text-align: right; line-height: 1.5; }
 </style>
 </head>
 
@@ -704,29 +680,195 @@ body.presenter-mode .presenter {
         <div class="deck-viewport" id="viewport">
             <main class="deck-stage" id="deckStage">
 
-                <!-- ===== SLIDE 1 · Reference: Keynote Light (round 2, #1) ===== -->
-                <section class="slide" data-theme="keylight" data-label="1 · Keynote Light" data-sample>
-                    <aside class="notes">Reference — Keynote Light from round 2, unchanged. Clean, professional, Apple product page.</aside>
+                <!-- ===== SLIDE 1 · Concept A: Bento ===== -->
+                <section class="slide" data-theme="bento" data-label="A · Bento">
+                    <div class="bn">
+                        <header class="ch"><span class="brand"><i class="mk"></i>Heads-Up</span><span>01 · The problem</span></header>
+                        <div class="tile t-head reveal pop" style="--d:.05s">
+                            <p class="kick">Where the value lands vs. where it’s needed</p>
+                            <h2 class="ttl">Ansel’s notes arrive 6 minutes after the meeting. <span class="t2">Light users need them 7 days later.</span></h2>
+                        </div>
+                        <div class="tile t-seven reveal pop" style="--d:.2s">
+                            <span class="lbl">The gap</span>
+                            <span class="big num" data-to="7" data-delay="400">7</span>
+                            <span class="unit">days</span>
+                            <p>between Ansel’s summary and the moment a light user needs it again.</p>
+                        </div>
+                        <div class="tile t-tl reveal pop" style="--d:.32s">
+                            <div class="hx-days">
+                                <span style="--x:0">Mon</span><span style="--x:.142857">Tue</span><span style="--x:.285714">Wed</span><span style="--x:.428571">Thu</span>
+                                <span style="--x:.571429">Fri</span><span style="--x:.714286">Sat</span><span style="--x:.857143">Sun</span><span style="--x:1" class="next">Mon</span>
+                            </div>
+                            <div class="hx-row">
+                                <div class="hx-label"><b>Heavy user</b><small>15+ meetings a week</small></div>
+                                <div class="hx-track" data-heavy><i class="hx-line"></i><span class="hx-note">6.2 sessions a week</span></div>
+                            </div>
+                            <div class="hx-row">
+                                <div class="hx-label"><b>Light user</b><small>Under 5 a week</small></div>
+                                <div class="hx-track">
+                                    <i class="hx-line"></i>
+                                    <span class="hx-gap">0.4 Ansel sessions a week · the notes get buried</span>
+                                    <span class="hx-sync" style="--x:0; --d:.5s">Sync</span>
+                                    <span class="hx-need" style="--x:.95"></span>
+                                    <span class="hx-sync" style="--x:1; --d:1.6s">Sync</span>
+                                </div>
+                            </div>
+                            <div class="hx-annot"><span class="a-land">↑ Value lands ~6 min after</span><span class="a-need">Need peaks right before ↑</span></div>
+                        </div>
+                        <div class="tile t-stat s1 reveal pop" style="--d:.9s"><span class="num" data-to="34" data-suffix="%" data-delay="900">34%</span><p>of summaries are ever opened by attendees</p></div>
+                        <div class="tile t-stat s2 reveal pop" style="--d:1s"><span class="num" data-to="22" data-suffix="s" data-delay="1000">22s</span><p>average time spent reading one</p></div>
+                        <div class="tile t-stat s3 reveal pop" style="--d:1.1s"><span class="num" data-to="6" data-suffix="%" data-delay="1100">6%</span><p>of action items ever get marked done</p></div>
+                        <div class="tile t-hook reveal pop" style="--d:1.25s"><span class="arw">→</span><p>What if Ansel showed up before the next meeting?</p><small>Source: Kilts Center Ansel case (2026), Ex 3, 5</small></div>
+                    </div>
+                    <aside class="notes">Concept A — Bento. Apple WWDC-style tile grid. One vivid coral tile carries the key number; the rest stay calm white and soft pastels. Ends on a hook into the solution.</aside>
                 </section>
 
-                <!-- ===== SLIDE 2 · Hybrid A: Light + Glow ===== -->
-                <section class="slide" data-theme="keylight" data-variant="glow" data-label="A · Light + Glow" data-sample>
-                    <aside class="notes">Hybrid A — Light + Glow. Keynote Light's layout and type, plus faint color glows behind frosted cards and a coral accent. Closest to 1.</aside>
+                <!-- ===== SLIDE 2 · Concept B: Aurora ===== -->
+                <section class="slide" data-theme="aurora" data-label="B · Aurora">
+                    <div class="au-glow" aria-hidden="true"></div>
+                    <div class="au">
+                        <header class="ch"><span class="brand"><i class="mk"></i>Heads-Up</span><span>01 · The problem</span></header>
+                        <div class="left">
+                            <p class="kick reveal" style="--d:.05s">Where the value lands vs. where it’s needed</p>
+                            <h2 class="ttl reveal" style="--d:.15s">Ansel’s notes arrive 6 minutes after the meeting. <span class="t2">Light users need them 7 days later.</span></h2>
+                            <div class="stats">
+                                <div class="st reveal" style="--d:1.1s"><span class="num" data-to="34" data-suffix="%" data-delay="1100">34%</span><p>of summaries are ever opened by attendees</p></div>
+                                <div class="st reveal" style="--d:1.2s"><span class="num" data-to="22" data-suffix="s" data-delay="1200">22s</span><p>average time spent reading one</p></div>
+                                <div class="st reveal" style="--d:1.3s"><span class="num" data-to="6" data-suffix="%" data-delay="1300">6%</span><p>of action items ever get marked done</p></div>
+                                <p class="src">Source: Kilts Center Ansel case (2026), Ex 3, 5</p>
+                            </div>
+                        </div>
+                        <div class="glass reveal pop" style="--d:.25s">
+                            <div class="wk">
+                                <span class="hd"></span><span class="hd">Heavy user · 15+ a week</span><span class="hd">Light user · under 5 a week</span>
+                                <span class="d">Mon</span><span class="h" style="--r:0"><i></i><i></i><i></i></span><span class="lc"><span class="chip sync">Sync</span><span class="chip mail">✉ Summary +6 min</span></span>
+                                <span class="d">Tue</span><span class="h" style="--r:1"><i></i><i></i><i></i></span><span class="lc"></span>
+                                <span class="d">Wed</span><span class="h" style="--r:2"><i></i><i></i><i></i></span><span class="lc"></span>
+                                <span class="d">Thu</span><span class="h" style="--r:3"><i></i><i></i><i></i></span><span class="lc"></span>
+                                <span class="d">Fri</span><span class="h" style="--r:4"><i></i><i></i><i></i></span><span class="lc"></span>
+                                <span class="d">Sat</span><span class="h" style="--r:5"></span><span class="lc"></span>
+                                <span class="d">Sun</span><span class="h" style="--r:6"></span><span class="lc"></span>
+                                <span class="d nx">Mon</span><span class="h" style="--r:7"><i></i><i></i><i></i></span><span class="lc"><i class="need-dot"></i><span class="chip need">Need it now</span><span class="chip sync">Sync</span></span>
+                                <div class="bar"><div><b>7 days</b>0.4 Ansel sessions a week.<br>The notes get buried.</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">Concept B — Aurora. Dark glass with slowly drifting aurora light. The week runs top to bottom, so the 7-day gap reads as a long empty stretch.</aside>
                 </section>
 
-                <!-- ===== SLIDE 3 · Hybrid B: Color Moments ===== -->
-                <section class="slide" data-theme="keylight" data-variant="color" data-label="B · Color Moments" data-sample>
-                    <aside class="notes">Hybrid B — Color Moments. Pure white like 1, but the creativity comes from color: a warm gradient on the key line and softly tinted stat cards, each with its own color. No glows.</aside>
+                <!-- ===== SLIDE 3 · Concept C: Mesh ===== -->
+                <section class="slide" data-theme="mesh" data-label="C · Mesh + product card">
+                    <div class="ms-bg" aria-hidden="true"></div><div class="ms-grain" aria-hidden="true"></div>
+                    <div class="ms">
+                        <header class="ch"><span class="brand"><i class="mk"></i>Heads-Up</span><span>01 · The problem</span></header>
+                        <div class="left">
+                            <p class="kick reveal" style="--d:.05s">Where the value lands vs. where it’s needed</p>
+                            <h2 class="ttl reveal" style="--d:.15s">Ansel’s notes arrive 6 minutes after the meeting. <span class="t2">Light users need them 7 days later.</span></h2>
+                        </div>
+                        <div class="right">
+                            <div class="card back reveal" style="--d:.35s">
+                                <div class="row-h"><span class="ico ico-mail">A</span><div><b>Ansel · Meeting summary</b><span>Weekly Product Sync · 7 days ago</span></div><span class="tag">Archived</span></div>
+                            </div>
+                            <div class="card front reveal pop" style="--d:.6s">
+                                <div class="row-h"><span class="ico ico-cal"><small>MON</small>17</span><div><b>Weekly Product Sync</b><span>Today · 2:00 PM · starts in 30 min</span></div></div>
+                                <div class="lines">
+                                    <div class="ln reveal" style="--d:.95s"><span>Last week’s notes</span><span class="bad">Unopened</span></div>
+                                    <div class="ln reveal" style="--d:1.1s"><span>Your action items</span><em>0 of 4 marked done</em></div>
+                                    <div class="ln reveal" style="--d:1.25s"><span>What was decided</span><em>Buried in email</em></div>
+                                </div>
+                                <div class="cold reveal" style="--d:1.5s"><i></i>You’re walking in cold.</div>
+                            </div>
+                        </div>
+                        <div class="pills">
+                            <div class="pill reveal" style="--d:1.7s"><span class="num" data-to="34" data-suffix="%" data-delay="1700">34%</span><span class="l">of summaries opened</span></div>
+                            <div class="pill reveal" style="--d:1.8s"><span class="num" data-to="22" data-suffix="s" data-delay="1800">22s</span><span class="l">spent reading one</span></div>
+                            <div class="pill reveal" style="--d:1.9s"><span class="num" data-to="6" data-suffix="%" data-delay="1900">6%</span><span class="l">of action items done</span></div>
+                            <span class="src">Source: Kilts Center Ansel case (2026), Ex 3, 5 · card is illustrative</span>
+                        </div>
+                    </div>
+                    <aside class="notes">Concept C — Mesh. Grainy full-bleed gradient like an Apple wallpaper. Instead of a chart, the visual is the user's actual moment: the meeting reminder, with last week's summary email archived behind it.</aside>
                 </section>
 
-                <!-- ===== SLIDE 4 · Hybrid C: Clear Glass ===== -->
-                <section class="slide" data-theme="glass" data-variant="clear" data-label="C · Clear Glass" data-sample>
-                    <aside class="notes">Hybrid C — Clear Glass. Soft Glass's colored light and frosted cards, but with Keynote Light's full-width layout and Apple-like type for a tidier, more professional read. Closest to 5.</aside>
+                <!-- ===== SLIDE 4 · Concept D: Calendar ===== -->
+                <section class="slide" data-theme="calendar" data-label="D · Calendar week">
+                    <div class="cal">
+                        <header class="ch"><span class="brand"><i class="mk"></i>Heads-Up</span><span>01 · The problem</span></header>
+                        <p class="kick reveal" style="--d:.05s">Where the value lands vs. where it’s needed</p>
+                        <h2 class="ttl reveal" style="--d:.15s">Ansel’s notes arrive 6 minutes after the meeting.<br><span class="t2">Light users need them 7 days later.</span></h2>
+                        <div class="week">
+                            <span></span><span class="dh">Mon</span><span class="dh">Tue</span><span class="dh">Wed</span><span class="dh">Thu</span><span class="dh">Fri</span><span class="dh">Sat</span><span class="dh">Sun</span><span class="dh nx">Mon</span>
+                            <div class="lane"><b>Heavy user</b><small>15+ meetings a week</small></div>
+                            <div class="cell" style="--c:0"><i class="mt"></i><i class="mt"></i><i class="mt"></i></div>
+                            <div class="cell" style="--c:1"><i class="mt"></i><i class="mt"></i><i class="mt"></i></div>
+                            <div class="cell" style="--c:2"><i class="mt"></i><i class="mt"></i><i class="mt"></i></div>
+                            <div class="cell" style="--c:3"><i class="mt"></i><i class="mt"></i><i class="mt"></i></div>
+                            <div class="cell" style="--c:4"><i class="mt"></i><i class="mt"></i><i class="mt"></i></div>
+                            <div class="cell off" style="--c:5"></div>
+                            <div class="cell off" style="--c:6"></div>
+                            <div class="cell" style="--c:7"><i class="mt"></i><i class="mt"></i><i class="mt"></i></div>
+                            <div class="lane"><b>Light user</b><small>Under 5 a week</small></div>
+                            <div class="cell" style="--c:0"><span class="chip sync">Sync</span><span class="chip mail">✉ Summary +6 min</span></div>
+                            <div class="cell ghost"></div><div class="cell ghost"></div><div class="cell ghost"></div><div class="cell ghost"></div><div class="cell ghost"></div><div class="cell ghost"></div>
+                            <div class="cell hot" style="--c:7"><span class="chip need">Need it now</span><span class="chip sync">Sync</span></div>
+                            <div class="band"><span><b>Notes buried in the inbox</b> · 0.4 Ansel sessions a week</span></div>
+                        </div>
+                        <div class="stats">
+                            <div class="st reveal" style="--d:1.6s"><span class="num" data-to="34" data-suffix="%" data-delay="1600">34%</span><p>of summaries are ever opened by attendees</p></div>
+                            <div class="st reveal" style="--d:1.7s"><span class="num" data-to="22" data-suffix="s" data-delay="1700">22s</span><p>average time spent reading one</p></div>
+                            <div class="st reveal" style="--d:1.8s"><span class="num" data-to="6" data-suffix="%" data-delay="1800">6%</span><p>of action items ever get marked done</p></div>
+                            <span class="src">Source: Kilts Center Ansel case (2026), Ex 3, 5</span>
+                        </div>
+                    </div>
+                    <aside class="notes">Concept D — Calendar week. The infographic is the thing the audience already knows: a week calendar. The heavy user's week is full; the light user's has a hatched, empty gap between syncs.</aside>
                 </section>
 
-                <!-- ===== SLIDE 5 · Reference: Soft Glass (round 2, #5) ===== -->
-                <section class="slide" data-theme="glass" data-label="5 · Soft Glass" data-sample>
-                    <aside class="notes">Reference — Soft Glass from round 2, unchanged.</aside>
+                <!-- ===== SLIDE 5 · Concept E: Curve ===== -->
+                <section class="slide" data-theme="curve" data-label="E · Memory curve">
+                    <div class="cv">
+                        <header class="ch"><span class="brand"><i class="mk"></i>Heads-Up</span><span>01 · The problem</span></header>
+                        <p class="kick reveal" style="--d:.05s">Where the value lands vs. where it’s needed</p>
+                        <h2 class="ttl reveal" style="--d:.15s">Ansel’s notes arrive 6 minutes after the meeting.<br><span class="t2">Light users need them 7 days later.</span></h2>
+                        <div class="chart">
+                            <svg viewBox="0 0 1696 440" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="cvMemStroke" gradientUnits="userSpaceOnUse" x1="40" x2="1656" y1="0" y2="0"><stop offset="0" stop-color="#111214"/><stop offset="1" stop-color="#c3c5ca"/></linearGradient>
+                                    <linearGradient id="cvMemFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#111214" stop-opacity=".09"/><stop offset="1" stop-color="#111214" stop-opacity="0"/></linearGradient>
+                                    <linearGradient id="cvNeed" gradientUnits="userSpaceOnUse" x1="1100" x2="1620" y1="0" y2="0"><stop offset="0" stop-color="#ffc06a"/><stop offset="1" stop-color="#ff5b3a"/></linearGradient>
+                                    <filter id="cvBlur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8"/></filter>
+                                </defs>
+                                <g stroke="#f1f1f3" stroke-width="1">
+                                    <line x1="40" y1="20" x2="40" y2="392"/><line x1="270.9" y1="20" x2="270.9" y2="392"/><line x1="501.7" y1="20" x2="501.7" y2="392"/><line x1="732.6" y1="20" x2="732.6" y2="392"/>
+                                    <line x1="963.4" y1="20" x2="963.4" y2="392"/><line x1="1194.3" y1="20" x2="1194.3" y2="392"/><line x1="1425.1" y1="20" x2="1425.1" y2="392"/><line x1="1656" y1="20" x2="1656" y2="392"/>
+                                </g>
+                                <line x1="40" y1="392" x2="1656" y2="392" stroke="#dcdce0" stroke-width="1.5"/>
+                                <path class="fade" style="--d:1.2s" d="M40,96 C130,98 200,240 360,296 S900,364 1656,372 L1656,392 L40,392 Z" fill="url(#cvMemFill)"/>
+                                <path class="draw" style="--d:.4s" pathLength="1" d="M40,96 C130,98 200,240 360,296 S900,364 1656,372" fill="none" stroke="url(#cvMemStroke)" stroke-width="5" stroke-linecap="round"/>
+                                <path class="draw" style="--d:1.5s" pathLength="1" d="M40,384 L1200,382 C1420,380 1520,320 1572,180 S1612,64 1620,60" fill="none" stroke="url(#cvNeed)" stroke-width="14" stroke-linecap="round" filter="url(#cvBlur)" opacity=".35"/>
+                                <path class="draw" style="--d:1.5s" pathLength="1" d="M40,384 L1200,382 C1420,380 1520,320 1572,180 S1612,64 1620,60" fill="none" stroke="url(#cvNeed)" stroke-width="6" stroke-linecap="round"/>
+                                <path class="fade" style="--d:3s" d="M1620,78 L1620,364" stroke="#ff5b3a" stroke-width="2" stroke-dasharray="6 8" fill="none"/>
+                                <circle class="fade" style="--d:.3s" cx="40" cy="96" r="9" fill="#111214"/>
+                                <text class="day" x="40" y="428" text-anchor="middle">Mon</text><text class="day" x="270.9" y="428" text-anchor="middle">Tue</text>
+                                <text class="day" x="501.7" y="428" text-anchor="middle">Wed</text><text class="day" x="732.6" y="428" text-anchor="middle">Thu</text>
+                                <text class="day" x="963.4" y="428" text-anchor="middle">Fri</text><text class="day" x="1194.3" y="428" text-anchor="middle">Sat</text>
+                                <text class="day" x="1425.1" y="428" text-anchor="middle">Sun</text><text class="day nx" x="1656" y="428" text-anchor="middle">Mon</text>
+                            </svg>
+                            <div class="lb mem fade" style="left:68px; top:18px; --d:.5s"><b>Summary lands</b>~6 min after the sync</div>
+                            <div class="lb muted fade" style="left:470px; top:258px; --d:1.3s">What you remember</div>
+                            <div class="lb need fade" style="left:930px; top:330px; --d:2.2s">When you need it</div>
+                            <div class="lb need fade" style="right:96px; top:10px; --d:2.6s"><b>Need peaks</b>minutes before the next sync</div>
+                            <div class="lb need fade" style="right:250px; top:150px; --d:3.1s; font-weight:600">The gap Heads-Up closes →</div>
+                            <span class="pulse fade" style="left:1620px; top:60px; --d:2.6s"></span>
+                            <span class="sync fade" style="left:40px; --d:.3s">Sync</span>
+                            <span class="sync fade" style="left:1656px; --d:2.8s">Sync</span>
+                        </div>
+                        <div class="stats">
+                            <div class="st reveal" style="--d:1.8s"><span class="num" data-to="34" data-suffix="%" data-delay="1800">34%</span><p>of summaries are ever opened by attendees</p></div>
+                            <div class="st reveal" style="--d:1.9s"><span class="num" data-to="22" data-suffix="s" data-delay="1900">22s</span><p>average time spent reading one</p></div>
+                            <div class="st reveal" style="--d:2s"><span class="num" data-to="6" data-suffix="%" data-delay="2000">6%</span><p>of action items ever get marked done</p></div>
+                            <span class="src">Curves illustrative.<br>Figures: Ansel case (2026), Ex 3, 5</span>
+                        </div>
+                    </div>
+                    <aside class="notes">Concept E — Memory curve. One elegant chart: what you remember fades through the week while your need spikes right before the next sync. The gap between the two lines is what Heads-Up closes.</aside>
                 </section>
 
             </main>
@@ -787,70 +929,13 @@ body.presenter-mode .presenter {
     </div>
 </div>
 
-<!-- ===========================================
-     SAMPLE CONTENT (theme exploration only)
-     One infographic, rendered in each theme for a fair comparison.
-     =========================================== -->
-<template id="sampleSlide">
-    <div class="hx">
-        <div class="hx-deco" aria-hidden="true"></div>
-        <header class="hx-chrome">
-            <span class="hx-brand"><i class="hx-mark"></i>Heads-Up</span>
-            <span>01 · The problem</span>
-        </header>
-        <p class="hx-kicker reveal" style="--d:.05s">Where the value lands vs. where it’s needed</p>
-        <h2 class="hx-title reveal" style="--d:.15s"><span class="t1">Ansel’s notes arrive <em>6&nbsp;minutes</em> after the meeting.</span> <span class="t2">Light users need them <em>7&nbsp;days later.</em></span></h2>
-        <div class="hx-hero">
-            <div class="h-a reveal" style="--d:.45s"><span class="h-fig"><span class="n" data-to="6" data-delay="450">6</span><span class="u"> min</span></span><span class="h-cap">Summary lands after the meeting</span></div>
-            <div class="h-arrow reveal" style="--d:.7s"><i></i></div>
-            <div class="h-b reveal" style="--d:.9s"><span class="h-fig"><span class="n" data-to="7" data-delay="900">7</span><span class="u"> days</span><small> later</small></span><span class="h-cap">Until a light user needs it again, and by then the email is buried.</span></div>
-        </div>
-        <div class="hx-tl reveal" style="--d:.3s">
-            <div class="hx-days">
-                <span style="--x:0">Mon</span><span style="--x:.142857">Tue</span><span style="--x:.285714">Wed</span>
-                <span style="--x:.428571">Thu</span><span style="--x:.571429">Fri</span><span style="--x:.714286">Sat</span>
-                <span style="--x:.857143">Sun</span><span style="--x:1" class="next">Mon</span>
-            </div>
-            <div class="hx-row">
-                <div class="hx-label"><b>Heavy user</b><small>15+ meetings a week</small></div>
-                <div class="hx-track" data-heavy><i class="hx-line"></i><span class="hx-note">6.2 sessions a week</span></div>
-            </div>
-            <div class="hx-row">
-                <div class="hx-label"><b>Light user</b><small>Under 5 a week</small></div>
-                <div class="hx-track">
-                    <i class="hx-line"></i>
-                    <span class="hx-gap">0.4 Ansel sessions a week · the notes get buried</span>
-                    <span class="hx-sync" style="--x:0; --d:.5s">Sync</span>
-                    <span class="hx-need" style="--x:.95"></span>
-                    <span class="hx-sync" style="--x:1; --d:1.6s">Sync</span>
-                </div>
-            </div>
-            <div class="hx-annot">
-                <span class="a-land">↑ Value lands ~6 min after</span>
-                <span class="a-need">Need peaks right before ↑</span>
-            </div>
-        </div>
-        <div class="hx-stats">
-            <div class="hx-stat reveal" style="--d:1.2s"><span class="hx-num" data-to="34" data-suffix="%" data-delay="1200">34%</span><p>of summaries are ever opened by attendees</p><small>Case Ex 5</small></div>
-            <div class="hx-stat reveal" style="--d:1.35s"><span class="hx-num" data-to="22" data-suffix="s" data-delay="1350">22s</span><p>average time spent reading one</p><small>Case Ex 5</small></div>
-            <div class="hx-stat reveal" style="--d:1.5s"><span class="hx-num" data-to="6" data-suffix="%" data-delay="1500">6%</span><p>of action items ever get marked done</p><small>Case Ex 5</small></div>
-        </div>
-        <footer class="hx-foot"><span>Source: Kilts Center Ansel case (2026), Exhibits 3 and 5</span><span>02</span></footer>
-    </div>
-</template>
-
 <script>
 /* ===========================================
-   SAMPLE BUILDER
-   Fills every [data-sample] slide with the shared infographic
-   and generates the heavy-user meeting dots (3 a day, Mon–Fri).
-   Remove once real slides are authored.
+   TIMELINE DOTS
    =========================================== */
-(function buildSamples() {
-    const tpl = document.getElementById('sampleSlide');
-    document.querySelectorAll('.slide[data-sample]').forEach(slide => {
-        slide.prepend(tpl.content.cloneNode(true));
-        const track = slide.querySelector('[data-heavy]');
+(function seedTimelineDots() {
+    // Heavy-user meeting dots: 3 a day, Mon-Fri
+    document.querySelectorAll('[data-heavy]').forEach(track => {
         let i = 0;
         for (let d = 0; d < 5; d++) for (let k = 0; k < 3; k++) {
             const dot = document.createElement('i');
@@ -917,6 +1002,8 @@ class Deck {
         const clone = slide.cloneNode(true);
         clone.classList.add('active', 'visible');
         clone.querySelector('aside.notes')?.remove();
+        // Drop ids so SVG gradients/filters resolve to the live slide, not a hidden copy
+        clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
         holder.appendChild(clone);
         return holder;
     }
