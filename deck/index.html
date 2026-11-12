@@ -12,7 +12,7 @@
      =========================================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Public+Sans:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400;1,6..72,500&family=Manrope:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 
 <style>
 /* ===========================================
@@ -324,243 +324,298 @@ body.presenter-mode .presenter {
 .static, .static * { transition: none !important; animation: none !important; }
 
 /* ===========================================
-   SLIDE THEMES (five candidates)
-   Each slide sets data-theme. Tokens below drive the shared
-   infographic layout; decorations are per-theme further down.
+   SLIDE THEMES — ROUND 2 (five candidates)
+   Same DOM on every slide; each theme sets its own tokens AND
+   its own layout (grid areas), so you compare real design
+   systems, not just color swaps.
    =========================================== */
-.slide[data-theme="swiss"] {
-    --bg: #ffffff; --ink: #111111; --muted: #5e5e5e; --faint: #e4e4e4;
-    --accent: #d23a1e; --on-accent: #fff;
-    --surface: transparent; --surface-line: transparent; --radius: 0px;
-    --f-display: 'Archivo', sans-serif; --f-body: 'Archivo', sans-serif; --f-mono: 'Archivo', sans-serif;
-    --t-weight: 800; --t-track: -0.035em; --t-size: 76px;
-    --em-style: normal; --em-color: var(--accent);
-    --pill-bg: #111; --pill-ink: #fff; --gap-bg: #f3f3f3;
-}
-.slide[data-theme="blue"] {
-    --bg: #fdfae7; --ink: #111111; --muted: #6b6b6b; --faint: rgba(30,43,250,.16);
-    --accent: #1e2bfa; --on-accent: #fff;
-    --surface: rgba(30,43,250,.04); --surface-line: rgba(30,43,250,.2); --radius: 14px;
-    --f-display: 'Space Grotesk', sans-serif; --f-body: 'Inter', sans-serif; --f-mono: 'Space Grotesk', sans-serif;
-    --t-weight: 600; --t-track: -0.03em; --t-size: 74px;
-    --em-style: normal; --em-color: var(--accent);
-    --pill-bg: #1e2bfa; --pill-ink: #fff; --gap-bg: #f3f0e6;
-}
-.slide[data-theme="signal"] {
-    --bg: #1c2644; --ink: #ece6da; --muted: #8a96a8; --faint: rgba(226,220,208,.14);
-    --accent: #c8a870; --on-accent: #1c2644;
-    --surface: transparent; --surface-line: rgba(226,220,208,.16); --radius: 0px;
-    --f-display: 'Source Serif 4', Georgia, serif; --f-body: 'DM Sans', sans-serif; --f-mono: 'IBM Plex Mono', monospace;
-    --t-weight: 400; --t-track: -0.015em; --t-size: 80px;
-    --em-style: italic; --em-color: var(--accent);
-    --pill-bg: #ece6da; --pill-ink: #1c2644; --gap-bg: #232e4d;
-}
-.slide[data-theme="booth"] {
-    --bg: #f7f4ee; --ink: #1f1a17; --muted: #6e655e; --faint: #dcd4c8;
-    --accent: #800000; --on-accent: #fff;
-    --surface: #fffdf9; --surface-line: #e4ddd2; --radius: 4px;
-    --f-display: 'Libre Caslon Text', Georgia, serif; --f-body: 'Public Sans', sans-serif; --f-mono: 'Public Sans', sans-serif;
-    --t-weight: 400; --t-track: -0.02em; --t-size: 72px;
-    --em-style: italic; --em-color: var(--accent);
-    --pill-bg: #800000; --pill-ink: #fff; --gap-bg: #efe9df;
-}
-.slide[data-theme="graphite"] {
-    --bg: #111316; --ink: #ededee; --muted: #8b9097; --faint: #2a2e34;
-    --accent: #6fbfae; --on-accent: #0c1513;
-    --surface: #181b1f; --surface-line: #262a30; --radius: 14px;
-    --f-display: 'Geist', sans-serif; --f-body: 'Geist', sans-serif; --f-mono: 'Geist Mono', monospace;
-    --t-weight: 600; --t-track: -0.04em; --t-size: 74px;
-    --em-style: normal; --em-color: var(--accent);
-    --pill-bg: #ededee; --pill-ink: #111316; --gap-bg: #181b1f;
-}
 
-/* ===========================================
-   SHARED INFOGRAPHIC LAYOUT (sample slide)
-   All sizes are authored at 1920×1080.
-   =========================================== */
+/* ---------- Shared building blocks ---------- */
 .slide[data-theme] { background: var(--bg); color: var(--ink); font-family: var(--f-body); }
-.hx {
-    position: absolute; inset: 0; padding: 72px 128px 60px;
-    display: flex; flex-direction: column;
-}
+.hx { position: absolute; inset: 0; display: grid; }
 .hx-deco { position: absolute; inset: 0; pointer-events: none; }
-.hx > *:not(.hx-deco) { position: relative; }
+.hx > *:not(.hx-deco) { position: relative; min-width: 0; }
+.hx-chrome { grid-area: chrome; display: flex; justify-content: space-between; align-items: center; font-size: 19px; color: var(--muted); }
+.hx-brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); font-weight: 600; }
+.hx-mark { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.hx-kicker { grid-area: kicker; margin: 0; font-size: 20px; font-weight: 600; color: var(--accent); }
+.hx-title { grid-area: title; margin: 0; font-family: var(--f-display); }
+.hx-title em { font-style: normal; }
+.hx-title .t2 { color: var(--muted); }
+.hx-hero { grid-area: hero; display: none; }
+.hx-tl { grid-area: tl; --label-w: 260px; --pad: 52px; }
+.hx-stats { grid-area: stats; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.hx-foot { grid-area: foot; display: flex; justify-content: space-between; align-items: end; font-size: 15px; color: var(--muted); }
+.hx-num { display: block; font-family: var(--f-display); line-height: 1; font-variant-numeric: tabular-nums; }
+.hx-stat p { margin: 0; }
 
-.hx-chrome {
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--f-mono); font-size: 20px; color: var(--muted); letter-spacing: .02em;
-}
-.hx-brand { display: inline-flex; align-items: center; gap: 14px; color: var(--ink); font-weight: 600; }
-.hx-mark { width: 16px; height: 16px; background: var(--accent); display: inline-block; }
-
-.hx-head { margin-top: 64px; }
-.hx-eyebrow {
-    margin: 0 0 22px; font-family: var(--f-mono); font-size: 20px; font-weight: 500;
-    letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
-}
-.hx-title {
-    margin: 0; max-width: 1560px;
-    font-family: var(--f-display); font-weight: var(--t-weight);
-    font-size: var(--t-size); line-height: 1.06; letter-spacing: var(--t-track);
-}
-.hx-title em { font-style: var(--em-style); color: var(--em-color); }
-
-/* --- Timeline: where value lands vs. where it's needed --- */
-.hx-tl { margin-top: 64px; --label-w: 300px; --pad: 56px; }
+/* ---------- Timeline component (tokenized) ---------- */
 .hx-days, .hx-track { position: relative; margin-left: calc(var(--label-w) + var(--pad)); margin-right: var(--pad); }
-.hx-days { height: 32px; font-size: 19px; color: var(--muted); font-family: var(--f-mono); }
+.hx-days { height: 30px; font-size: 17px; color: var(--muted); }
 .hx-days span { position: absolute; left: calc(var(--x) * 100%); transform: translateX(-50%); white-space: nowrap; }
 .hx-days span.next { color: var(--ink); font-weight: 600; }
-.hx-row { position: relative; display: flex; align-items: center; height: 96px; border-top: 1px solid var(--faint); }
-.hx-row:last-of-type { border-bottom: 1px solid var(--faint); }
+.hx-row { position: relative; display: flex; align-items: center; height: 84px; }
 .hx-label { position: absolute; left: 0; width: var(--label-w); }
-.hx-label b { display: block; font-size: 27px; font-weight: 600; letter-spacing: -0.01em; }
-.hx-label small { display: block; margin-top: 4px; font-size: 19px; color: var(--muted); }
+.hx-label b { display: block; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
+.hx-label small { display: block; margin-top: 3px; font-size: 17px; color: var(--muted); }
 .hx-row .hx-track { flex: 1; height: 100%; }
 .hx-line {
     position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px;
-    background: var(--faint); transform-origin: left; transform: scaleX(0);
+    background: var(--line); transform-origin: left; transform: scaleX(0);
     transition: transform 1.1s var(--ease) .45s;
 }
 .hx-dot {
     position: absolute; top: 50%; left: calc(var(--x) * 100%);
-    width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%;
-    background: var(--muted); transform: scale(0);
+    width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%;
+    background: var(--dot); transform: scale(0);
     transition: transform .4s var(--ease); transition-delay: calc(.55s + var(--i) * .045s);
 }
+.hx-track[data-heavy] .hx-line { right: 210px; }
 .hx-note {
-    position: absolute; right: 0; top: 50%; transform: translateY(-50%);
-    padding-left: 14px; background: var(--bg);
-    font-size: 19px; font-style: italic; color: var(--muted); opacity: 0;
+    position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 17px; color: var(--muted); opacity: 0;
     transition: opacity .6s ease 1.3s;
 }
 .hx-gap {
-    position: absolute; top: 50%; left: 5%; right: 7.5%; height: 52px; margin-top: -26px;
-    display: grid; place-items: center; border-radius: var(--radius);
-    background: var(--gap-bg); font-size: 20px; color: var(--muted); z-index: 1;
+    position: absolute; top: 50%; left: 6%; right: 7.5%; height: 46px; margin-top: -23px; z-index: 1;
+    display: grid; place-items: center; border-radius: var(--gap-radius, 999px);
+    background: var(--gap-bg); font-size: 18px; color: var(--muted); white-space: nowrap;
     clip-path: inset(0 100% 0 0); transition: clip-path 1.2s var(--ease) .9s;
 }
 .hx-sync {
-    position: absolute; top: 50%; left: calc(var(--x) * 100%);
+    position: absolute; top: 50%; left: calc(var(--x) * 100%); z-index: 2;
     transform: translate(-50%, -50%) scale(0);
-    padding: 8px 18px; border-radius: 8px; font-size: 19px; font-weight: 600;
+    padding: 7px 16px; border-radius: var(--pill-radius, 999px); font-size: 17px; font-weight: 600;
     background: var(--pill-bg); color: var(--pill-ink);
     transition: transform .5s var(--ease); transition-delay: var(--d, .5s);
 }
 .hx-need {
-    position: absolute; top: 50%; left: calc(var(--x) * 100%);
-    width: 22px; height: 22px; margin: -11px 0 0 -11px;
-    background: var(--accent); transform: rotate(45deg) scale(0);
+    position: absolute; top: 50%; left: calc(var(--x) * 100%); z-index: 2;
+    width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%;
+    background: var(--accent); transform: scale(0);
     transition: transform .5s var(--ease) 1.85s;
 }
-.hx-need::after {
-    content: ""; position: absolute; inset: -9px; border: 2px solid var(--accent); opacity: 0;
-}
+.hx-need::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 2px solid var(--accent); opacity: 0; }
 .slide.visible .hx-need::after { animation: hx-pulse 1.8s ease-out 2.3s 3; }
-@keyframes hx-pulse { 0% { opacity: .7; transform: scale(.6); } 100% { opacity: 0; transform: scale(1.7); } }
-
+@keyframes hx-pulse { 0% { opacity: .7; transform: scale(.6); } 100% { opacity: 0; transform: scale(1.8); } }
 .hx-annot {
     display: flex; justify-content: space-between;
-    margin: 16px var(--pad) 0 calc(var(--label-w) + var(--pad));
-    font-size: 20px; font-weight: 600; opacity: 0; transition: opacity .6s ease 2s;
+    margin: 12px var(--pad) 0 calc(var(--label-w) + var(--pad));
+    font-size: 17px; font-weight: 600; opacity: 0; transition: opacity .6s ease 2s;
 }
 .hx-annot .a-land { color: var(--muted); }
 .hx-annot .a-need { color: var(--accent); }
-
 .slide.visible .hx-line { transform: scaleX(1); }
 .slide.visible .hx-dot { transform: scale(1); }
-.slide.visible .hx-note,
-.slide.visible .hx-annot { opacity: 1; }
+.slide.visible .hx-note, .slide.visible .hx-annot { opacity: 1; }
 .slide.visible .hx-gap { clip-path: inset(0 0 0 0); }
 .slide.visible .hx-sync { transform: translate(-50%, -50%) scale(1); }
-.slide.visible .hx-need { transform: rotate(45deg) scale(1); }
+.slide.visible .hx-need { transform: scale(1); }
 
-/* --- Stat cards --- */
-.hx-stats { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-.hx-stat {
-    padding: 28px 32px 26px; border-radius: var(--radius);
-    background: var(--surface); border: 1.5px solid var(--surface-line);
+/* ---------- Hero comparison (used by some themes) ---------- */
+.hx-hero .h-fig { display: block; font-family: var(--f-display); line-height: .9; font-variant-numeric: tabular-nums; }
+.hx-hero .h-cap { display: block; font-size: 22px; color: var(--muted); }
+.hx-hero .h-arrow { position: relative; overflow: hidden; }
+.hx-hero .h-arrow::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--line); }
+.hx-hero .h-arrow i {
+    position: absolute; top: 50%; left: 0; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%;
+    background: var(--accent); opacity: 0;
 }
-.hx-num {
-    display: block; font-family: var(--f-display); font-weight: var(--t-weight);
-    font-size: 92px; line-height: 1; letter-spacing: -0.04em; color: var(--accent);
-    font-variant-numeric: tabular-nums;
-}
-.hx-stat p { margin: 14px 0 0; font-size: 24px; line-height: 1.35; max-width: 440px; }
-.hx-stat small { display: block; margin-top: 10px; font-family: var(--f-mono); font-size: 16px; color: var(--muted); letter-spacing: .04em; }
+.slide.visible .hx-hero .h-arrow i { animation: hx-travel 2.4s var(--ease) .9s infinite; }
+@keyframes hx-travel { 0% { left: 0; opacity: 0; } 15% { opacity: 1; } 80% { opacity: 1; } 100% { left: calc(100% - 12px); opacity: 0; } }
 
-.hx-foot {
-    display: flex; justify-content: space-between; margin-top: 28px;
-    font-family: var(--f-mono); font-size: 16px; color: var(--muted); letter-spacing: .02em;
-}
 
-/* ===========================================
-   PER-THEME DECORATION
-   =========================================== */
-/* Swiss Modern: visible column grid, heavy rules, red signal square */
-.slide[data-theme="swiss"] .hx-deco {
-    background-image: repeating-linear-gradient(90deg, transparent 0 139px, #f1f1f1 139px 140px);
-    background-position: 128px 0;
+/* =====================================================
+   THEME 1 · KEYNOTE LIGHT
+   Apple product page: white, two-tone headline, gray bento cards.
+   ===================================================== */
+.slide[data-theme="keylight"] {
+    --bg: #ffffff; --ink: #1d1d1f; --muted: #6e6e73; --accent: #0071e3;
+    --line: #d2d2d7; --dot: #1d1d1f; --card: #f5f5f7;
+    --pill-bg: #1d1d1f; --pill-ink: #fff; --gap-bg: #e8e8ed; --note-bg: var(--card);
+    --f-display: 'Instrument Sans', sans-serif; --f-body: 'Instrument Sans', sans-serif;
 }
-.slide[data-theme="swiss"] .hx-chrome { text-transform: uppercase; font-weight: 600; letter-spacing: .08em; font-size: 17px; }
-.slide[data-theme="swiss"] .hx-eyebrow { font-weight: 700; letter-spacing: .1em; }
-.slide[data-theme="swiss"] .hx-stat { padding: 26px 0 0; border: 0; border-top: 6px solid var(--ink); }
-.slide[data-theme="swiss"] .hx-num { color: var(--ink); font-size: 104px; }
-.slide[data-theme="swiss"] .hx-need { background: var(--accent); }
-
-/* Blue Professional: pill eyebrow, tinted cards */
-.slide[data-theme="blue"] .hx-eyebrow {
-    display: inline-block; padding: 8px 18px; border-radius: 100px;
-    background: rgba(30,43,250,.07); border: 1.5px solid rgba(30,43,250,.2);
-    font-size: 17px; letter-spacing: .1em;
+.slide[data-theme="keylight"] .hx {
+    padding: 76px 132px 60px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto 1fr;
+    grid-template-areas: "chrome" "kicker" "title" "tl" "stats" "foot";
 }
-.slide[data-theme="blue"] .hx-mark { border-radius: 50%; }
-.slide[data-theme="blue"] .hx-sync { border-radius: 100px; }
-.slide[data-theme="blue"] .hx-need { border-radius: 4px; }
+.slide[data-theme="keylight"] .hx-kicker { margin-top: 58px; margin-bottom: 18px; font-size: 22px; }
+.slide[data-theme="keylight"] .hx-title { font-size: 78px; font-weight: 700; line-height: 1.04; letter-spacing: -0.045em; max-width: 1640px; }
+.slide[data-theme="keylight"] .hx-tl { margin-top: 48px; padding: 30px 8px 26px 44px; background: var(--card); border-radius: 36px; }
+.slide[data-theme="keylight"] .hx-stats { margin-top: 20px; gap: 20px; }
+.slide[data-theme="keylight"] .hx-stat { padding: 30px 36px; background: var(--card); border-radius: 30px; }
+.slide[data-theme="keylight"] .hx-num { font-size: 76px; font-weight: 700; letter-spacing: -0.05em; }
+.slide[data-theme="keylight"] .hx-stat p { margin-top: 10px; font-size: 22px; line-height: 1.3; color: var(--muted); }
+.slide[data-theme="keylight"] .hx-stat small { display: none; }
 
-/* Signal: navy, 80px grid fingerprint, hairline-separated stats, gold serif figures */
-.slide[data-theme="signal"] .hx-deco {
-    background-image:
-        linear-gradient(rgba(226,220,208,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(226,220,208,.035) 1px, transparent 1px);
-    background-size: 80px 80px;
+/* =====================================================
+   THEME 2 · KEYNOTE DARK
+   Apple event stage: black, centered, one giant comparison,
+   warm gradient on the key figure.
+   ===================================================== */
+.slide[data-theme="keydark"] {
+    --bg: #000000; --ink: #f5f5f7; --muted: #86868b; --accent: #ff9f6e;
+    --line: #2c2c2e; --dot: #f5f5f7; --pill-bg: #f5f5f7; --pill-ink: #000; --gap-bg: #1c1c1e;
+    --grad: linear-gradient(100deg, #ffd3a5 0%, #ff9f6e 45%, #ff6f61 100%);
+    --f-display: 'Hanken Grotesk', sans-serif; --f-body: 'Hanken Grotesk', sans-serif;
 }
-.slide[data-theme="signal"] .hx-chrome { font-size: 17px; text-transform: uppercase; letter-spacing: .12em; }
-.slide[data-theme="signal"] .hx-mark { width: 40px; height: 1.5px; }
-.slide[data-theme="signal"] .hx-eyebrow { font-size: 17px; letter-spacing: .18em; }
-.slide[data-theme="signal"] .hx-head { padding-top: 28px; border-top: 1px solid rgba(200,168,112,.55); }
-.slide[data-theme="signal"] .hx-stats { gap: 0; }
-.slide[data-theme="signal"] .hx-stat { border: 0; border-left: 1px solid var(--surface-line); padding: 8px 40px 4px; }
-.slide[data-theme="signal"] .hx-stat:first-child { border-left: 0; padding-left: 0; }
-.slide[data-theme="signal"] .hx-num { font-size: 104px; letter-spacing: -0.03em; }
-.slide[data-theme="signal"] .hx-sync { border-radius: 0; font-family: var(--f-mono); font-weight: 500; font-size: 17px; letter-spacing: .06em; }
-.slide[data-theme="signal"] .hx-label b { font-family: var(--f-display); font-weight: 400; font-size: 30px; }
-
-/* Booth Editorial: maroon spine, Caslon headline, paper cards with maroon caps */
-.slide[data-theme="booth"] .hx-deco::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 18px; background: var(--accent);
+.slide[data-theme="keydark"] .hx-deco { background: radial-gradient(ellipse 60% 45% at 50% 58%, rgba(255,140,90,.10), transparent 70%); }
+.slide[data-theme="keydark"] .hx {
+    padding: 76px 140px 60px; text-align: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr auto auto;
+    grid-template-areas: "chrome" "kicker" "title" "hero" "stats" "foot";
 }
-.slide[data-theme="booth"] .hx-chrome { font-size: 17px; text-transform: uppercase; letter-spacing: .14em; font-weight: 600; }
-.slide[data-theme="booth"] .hx-mark { display: none; }
-.slide[data-theme="booth"] .hx-brand { color: var(--accent); }
-.slide[data-theme="booth"] .hx-eyebrow { font-weight: 700; font-size: 18px; letter-spacing: .16em; }
-.slide[data-theme="booth"] .hx-title { line-height: 1.12; }
-.slide[data-theme="booth"] .hx-stat { border-top: 5px solid var(--accent); box-shadow: 0 1px 0 rgba(0,0,0,.03); }
-.slide[data-theme="booth"] .hx-num { font-weight: 700; font-size: 96px; }
-.slide[data-theme="booth"] .hx-sync { border-radius: 3px; }
+.slide[data-theme="keydark"] .hx-tl { display: none; }
+.slide[data-theme="keydark"] .hx-mark { background: var(--grad); }
+.slide[data-theme="keydark"] .hx-kicker { margin-top: 66px; margin-bottom: 20px; font-size: 24px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; justify-self: center; }
+.slide[data-theme="keydark"] .hx-title { font-size: 68px; font-weight: 700; line-height: 1.08; letter-spacing: -0.035em; max-width: 1300px; justify-self: center; }
+.slide[data-theme="keydark"] .hx-hero { display: grid; grid-template-columns: 1fr 260px 1fr; align-items: center; align-self: center; gap: 40px; }
+.slide[data-theme="keydark"] .h-fig small { display: none; }
+.slide[data-theme="keydark"] .h-fig { white-space: nowrap; font-size: 220px; font-weight: 800; letter-spacing: -0.06em; }
+.slide[data-theme="keydark"] .h-a .h-fig { color: #3a3a3c; }
+.slide[data-theme="keydark"] .h-b .h-fig { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; padding-bottom: 8px; }
+.slide[data-theme="keydark"] .h-cap { margin-top: 18px; }
+.slide[data-theme="keydark"] .h-arrow { height: 40px; }
+.slide[data-theme="keydark"] .hx-stats { gap: 0; margin-bottom: 36px; }
+.slide[data-theme="keydark"] .hx-stat { padding: 4px 40px; border-left: 1px solid #2c2c2e; }
+.slide[data-theme="keydark"] .hx-stat:first-child { border-left: 0; }
+.slide[data-theme="keydark"] .hx-num { font-size: 60px; font-weight: 700; letter-spacing: -0.04em; }
+.slide[data-theme="keydark"] .hx-stat p { margin-top: 10px; font-size: 20px; color: var(--muted); }
+.slide[data-theme="keydark"] .hx-stat small { display: none; }
+.slide[data-theme="keydark"] .hx-foot { justify-content: center; gap: 40px; }
 
-/* Graphite: product-dark, dot grid, soft teal accent, mono labels */
-.slide[data-theme="graphite"] .hx-deco {
+/* =====================================================
+   THEME 3 · MAGAZINE
+   Print feature spread: warm paper, oversized serif headline,
+   figures run down a side column, hairline rules, one spot color.
+   ===================================================== */
+.slide[data-theme="magazine"] {
+    --bg: #f3efe6; --ink: #1a1917; --muted: #6d675d; --accent: #c4532e;
+    --line: #1a1917; --dot: #1a1917; --pill-bg: #1a1917; --pill-ink: #f3efe6; --gap-bg: transparent;
+    --pill-radius: 0; --gap-radius: 0;
+    --f-display: 'Instrument Serif', Georgia, serif; --f-body: 'Figtree', sans-serif;
+}
+.slide[data-theme="magazine"] .hx {
+    padding: 64px 120px 52px; column-gap: 96px;
+    grid-template-columns: 1fr 460px;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-template-areas: "chrome chrome" "kicker kicker" "title stats" "tl tl" "foot foot";
+}
+.slide[data-theme="magazine"] .hx-chrome { padding-bottom: 18px; border-bottom: 1.5px solid var(--ink); font-size: 16px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--ink); }
+.slide[data-theme="magazine"] .hx-mark { display: none; }
+.slide[data-theme="magazine"] .hx-brand { font-family: var(--f-display); font-size: 34px; letter-spacing: -0.01em; text-transform: none; font-weight: 400; }
+.slide[data-theme="magazine"] .hx-kicker { margin: 44px 0 22px; font-size: 16px; letter-spacing: .18em; text-transform: uppercase; }
+.slide[data-theme="magazine"] .hx-title { font-size: 122px; font-weight: 400; line-height: .98; letter-spacing: -0.02em; }
+.slide[data-theme="magazine"] .hx-title em { font-style: italic; color: var(--accent); }
+.slide[data-theme="magazine"] .hx-title .t2 { color: var(--ink); }
+.slide[data-theme="magazine"] .hx-stats { grid-template-columns: 1fr; gap: 0; align-self: start; border-top: 1px solid rgba(26,25,23,.25); }
+.slide[data-theme="magazine"] .hx-stat { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 20px; padding: 22px 0; border-bottom: 1px solid rgba(26,25,23,.25); }
+.slide[data-theme="magazine"] .hx-num { font-size: 92px; letter-spacing: -0.03em; }
+.slide[data-theme="magazine"] .hx-stat p { font-size: 20px; line-height: 1.35; }
+.slide[data-theme="magazine"] .hx-stat small { display: none; }
+.slide[data-theme="magazine"] .hx-tl { align-self: end; --label-w: 240px; }
+.slide[data-theme="magazine"] .hx-row { border-top: 1px solid rgba(26,25,23,.25); height: 74px; }
+.slide[data-theme="magazine"] .hx-label b { font-family: var(--f-display); font-weight: 400; font-size: 30px; }
+.slide[data-theme="magazine"] .hx-line { height: 1px; }
+.slide[data-theme="magazine"] .hx-dot { width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; }
+.slide[data-theme="magazine"] .hx-gap { font-style: italic; font-family: var(--f-display); font-size: 22px; color: var(--ink); background: var(--bg); left: 12%; right: 14%; }
+.slide[data-theme="magazine"] .hx-sync { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; padding: 7px 12px; }
+.slide[data-theme="magazine"] .hx-need { border-radius: 0; transform: rotate(45deg) scale(0); }
+.slide[data-theme="magazine"].visible .hx-need { transform: rotate(45deg) scale(1); }
+.slide[data-theme="magazine"] .hx-need::after { border-radius: 0; }
+.slide[data-theme="magazine"] .hx-note { font-family: var(--f-display); font-style: italic; font-size: 20px; }
+.slide[data-theme="magazine"] .hx-foot { margin-top: 22px; font-size: 14px; letter-spacing: .06em; }
+
+/* =====================================================
+   THEME 4 · COLOR BLOCK
+   Modern business-magazine cover: a butter-yellow panel carries
+   one enormous number; the story runs on the right.
+   ===================================================== */
+.slide[data-theme="block"] {
+    --bg: #fbfaf6; --ink: #121212; --muted: #5d5a52; --accent: #121212; --panel: #f1df8e;
+    --line: #d9d5ca; --dot: #121212; --pill-bg: #121212; --pill-ink: #fff; --gap-bg: #f1eee6;
+    --f-display: 'Schibsted Grotesk', sans-serif; --f-body: 'Schibsted Grotesk', sans-serif; --f-serif: 'Newsreader', Georgia, serif;
+}
+.slide[data-theme="block"] .hx-deco::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 640px; background: var(--panel); }
+.slide[data-theme="block"] .hx {
+    padding: 68px 104px 56px 76px; column-gap: 140px;
+    grid-template-columns: 484px 1fr;
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-areas: "chrome chrome" "kicker title" "hero tl" "hero stats" "foot foot";
+}
+.slide[data-theme="block"] .hx-chrome { font-size: 17px; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: .1em; }
+.slide[data-theme="block"] .hx-mark { border-radius: 0; background: var(--ink); }
+.slide[data-theme="block"] .hx-kicker { margin-top: 64px; font-size: 18px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.slide[data-theme="block"] .hx-title { margin-top: 58px; font-size: 56px; font-weight: 700; line-height: 1.06; letter-spacing: -0.035em; }
+.slide[data-theme="block"] .hx-title em { font-family: var(--f-serif); font-style: italic; font-weight: 400; letter-spacing: -0.02em; }
+.slide[data-theme="block"] .hx-title .t2 { color: var(--ink); }
+.slide[data-theme="block"] .hx-hero { display: block; align-self: end; padding-bottom: 6px; }
+.slide[data-theme="block"] .h-a, .slide[data-theme="block"] .h-arrow { display: none; }
+.slide[data-theme="block"] .h-fig { font-weight: 900; letter-spacing: -0.06em; white-space: nowrap; }
+.slide[data-theme="block"] .h-fig .n { display: block; font-size: 440px; line-height: .78; margin-left: -18px; }
+.slide[data-theme="block"] .h-fig .u, .slide[data-theme="block"] .h-fig small { font-size: 104px; letter-spacing: -0.05em; }
+.slide[data-theme="block"] .h-cap { margin-top: 30px; max-width: 420px; font-family: var(--f-serif); font-style: italic; font-size: 30px; line-height: 1.25; color: var(--ink); }
+.slide[data-theme="block"] .hx-tl { align-self: center; --label-w: 200px; --pad: 40px; }
+.slide[data-theme="block"] .hx-row { border-top: 1px solid var(--line); height: 80px; }
+.slide[data-theme="block"] .hx-row:last-of-type { border-bottom: 1px solid var(--line); }
+.slide[data-theme="block"] .hx-label b { font-size: 22px; }
+.slide[data-theme="block"] .hx-gap { font-size: 16px; }
+.slide[data-theme="block"] .hx-need { background: #121212; box-shadow: 0 0 0 5px var(--panel); }
+.slide[data-theme="block"] .hx-need::after { border-color: #121212; }
+.slide[data-theme="block"] .hx-stats { gap: 36px; padding-top: 30px; }
+.slide[data-theme="block"] .hx-stat { border-top: 4px solid var(--ink); padding-top: 20px; }
+.slide[data-theme="block"] .hx-num { font-size: 68px; font-weight: 800; letter-spacing: -0.05em; }
+.slide[data-theme="block"] .hx-stat p { margin-top: 10px; font-size: 19px; line-height: 1.35; color: var(--muted); }
+.slide[data-theme="block"] .hx-stat small { display: none; }
+.slide[data-theme="block"] .hx-foot { margin-top: 34px; color: var(--ink); font-size: 14px; }
+
+/* =====================================================
+   THEME 5 · SOFT GLASS
+   Calm macOS / visionOS feel: warm gray canvas, soft color
+   light behind frosted cards.
+   ===================================================== */
+.slide[data-theme="glass"] {
+    --bg: #eeebe6; --ink: #16181d; --muted: #5f6470; --accent: #e5603e;
+    --line: rgba(22,24,29,.14); --dot: #16181d; --pill-bg: #16181d; --pill-ink: #fff; --gap-bg: rgba(255,255,255,.7);
+    --glass: rgba(255,255,255,.55); --note-bg: transparent;
+    --f-display: 'Manrope', sans-serif; --f-body: 'Manrope', sans-serif;
+}
+.slide[data-theme="glass"] .hx-deco {
     background:
-        radial-gradient(ellipse 70% 60% at 85% 0%, rgba(111,191,174,.08), transparent 60%),
-        radial-gradient(circle, rgba(255,255,255,.06) 1px, transparent 1.4px) 0 0 / 32px 32px;
+        radial-gradient(circle at 12% 18%, rgba(255,176,138,.75), transparent 34%),
+        radial-gradient(circle at 92% 88%, rgba(146,186,255,.7), transparent 36%),
+        radial-gradient(circle at 70% 8%, rgba(170,222,205,.6), transparent 30%);
+    filter: blur(40px);
 }
-.slide[data-theme="graphite"] .hx-mark { border-radius: 4px; }
-.slide[data-theme="graphite"] .hx-chrome { font-size: 18px; }
-.slide[data-theme="graphite"] .hx-eyebrow { font-size: 18px; letter-spacing: .12em; }
-.slide[data-theme="graphite"] .hx-sync { border-radius: 8px; font-family: var(--f-mono); font-weight: 500; font-size: 17px; }
-.slide[data-theme="graphite"] .hx-need { border-radius: 4px; box-shadow: 0 0 24px rgba(111,191,174,.5); }
-.slide[data-theme="graphite"] .hx-num { font-weight: 500; letter-spacing: -0.05em; }
+.slide[data-theme="glass"] .hx {
+    padding: 72px 120px 56px; column-gap: 28px;
+    grid-template-columns: 1fr 460px;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-template-areas: "chrome chrome" "kicker kicker" "title title" "tl stats" "foot foot";
+}
+.slide[data-theme="glass"] .hx-mark { background: linear-gradient(135deg, #ffb08a, #92baff); width: 18px; height: 18px; }
+.slide[data-theme="glass"] .hx-kicker {
+    justify-self: start; margin: 60px 0 22px; padding: 9px 18px; border-radius: 999px; font-size: 18px;
+    background: var(--glass); border: 1px solid rgba(255,255,255,.8); backdrop-filter: blur(20px);
+}
+.slide[data-theme="glass"] .hx-title { font-size: 76px; font-weight: 700; line-height: 1.05; letter-spacing: -0.045em; max-width: 1500px; }
+.slide[data-theme="glass"] .hx-tl,
+.slide[data-theme="glass"] .hx-stat {
+    background: var(--glass); border: 1px solid rgba(255,255,255,.85);
+    backdrop-filter: blur(28px) saturate(1.2); -webkit-backdrop-filter: blur(28px) saturate(1.2);
+    box-shadow: 0 24px 60px rgba(40,40,70,.08);
+}
+.slide[data-theme="glass"] .hx-tl { margin-top: 50px; align-self: stretch; padding: 34px 4px 28px 40px; border-radius: 32px; --label-w: 210px; --pad: 44px; display: flex; flex-direction: column; justify-content: center; }
+.slide[data-theme="glass"] .hx-label b { font-size: 22px; }
+.slide[data-theme="glass"] .hx-gap { font-size: 16px; }
+.slide[data-theme="glass"] .hx-stats { margin-top: 50px; grid-template-columns: 1fr; gap: 16px; }
+.slide[data-theme="glass"] .hx-stat { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 14px; padding: 22px 28px; border-radius: 26px; }
+.slide[data-theme="glass"] .hx-num { font-size: 58px; font-weight: 800; letter-spacing: -0.05em; }
+.slide[data-theme="glass"] .hx-stat p { font-size: 19px; line-height: 1.3; color: var(--muted); }
+.slide[data-theme="glass"] .hx-stat small { display: none; }
+.slide[data-theme="glass"] .hx-foot { margin-top: 26px; }
 </style>
 </head>
 
@@ -586,29 +641,29 @@ body.presenter-mode .presenter {
         <div class="deck-viewport" id="viewport">
             <main class="deck-stage" id="deckStage">
 
-                <!-- ===== SLIDE 1 · Theme: Swiss Modern ===== -->
-                <section class="slide" data-theme="swiss" data-label="Swiss Modern" data-sample>
-                    <aside class="notes">Theme 1 — Swiss Modern. White canvas, black type, one red signal color, visible column grid. Most neutral and "Google-clean" of the five.</aside>
+                <!-- ===== SLIDE 1 · Theme: Keynote Light ===== -->
+                <section class="slide" data-theme="keylight" data-label="Keynote Light" data-sample>
+                    <aside class="notes">Theme 1 — Keynote Light. Apple product-page style: white, a two-tone headline (black, then gray), soft gray rounded "bento" cards. Simplest and cleanest.</aside>
                 </section>
 
-                <!-- ===== SLIDE 2 · Theme: Blue Professional ===== -->
-                <section class="slide" data-theme="blue" data-label="Blue Professional" data-sample>
-                    <aside class="notes">Theme 2 — Blue Professional. Warm cream paper, one cobalt accent, soft tinted cards. Consulting / B2B SaaS feel; closest to your Phase 1 brief.</aside>
+                <!-- ===== SLIDE 2 · Theme: Keynote Dark ===== -->
+                <section class="slide" data-theme="keydark" data-label="Keynote Dark" data-sample>
+                    <aside class="notes">Theme 2 — Keynote Dark. Apple event stage: black, centered, one giant before/after comparison with a warm gradient on the number that matters. Drops detail in favor of one big idea.</aside>
                 </section>
 
-                <!-- ===== SLIDE 3 · Theme: Signal ===== -->
-                <section class="slide" data-theme="signal" data-label="Signal (navy + gold)" data-sample>
-                    <aside class="notes">Theme 3 — Signal. Deep navy with an antique-gold accent and an editorial serif headline. Most "boardroom" of the five; very legible on a projector.</aside>
+                <!-- ===== SLIDE 3 · Theme: Magazine ===== -->
+                <section class="slide" data-theme="magazine" data-label="Magazine" data-sample>
+                    <aside class="notes">Theme 3 — Magazine. A print feature spread: warm paper, oversized serif headline with italic accents, figures running down a side column, hairline rules, one terracotta spot color.</aside>
                 </section>
 
-                <!-- ===== SLIDE 4 · Theme: Booth Editorial ===== -->
-                <section class="slide" data-theme="booth" data-label="Booth Editorial" data-sample>
-                    <aside class="notes">Theme 4 — Booth Editorial. Ivory paper, Booth maroon spine, classic Caslon headline. Nods to Chicago Booth without looking like a school template.</aside>
+                <!-- ===== SLIDE 4 · Theme: Color Block ===== -->
+                <section class="slide" data-theme="block" data-label="Color Block" data-sample>
+                    <aside class="notes">Theme 4 — Color Block. A modern business-magazine cover: a butter-yellow panel holds one enormous number, and the story runs on the right. Bold, but only black + one color.</aside>
                 </section>
 
-                <!-- ===== SLIDE 5 · Theme: Graphite ===== -->
-                <section class="slide" data-theme="graphite" data-label="Graphite (product dark)" data-sample>
-                    <aside class="notes">Theme 5 — Graphite. Product-style dark mode with a muted teal accent and mono labels. Feels like a modern product launch; pairs well with a live demo.</aside>
+                <!-- ===== SLIDE 5 · Theme: Soft Glass ===== -->
+                <section class="slide" data-theme="glass" data-label="Soft Glass" data-sample>
+                    <aside class="notes">Theme 5 — Soft Glass. Calm macOS / visionOS feel: warm gray canvas with soft colored light behind frosted-glass cards. Friendly and modern, still restrained.</aside>
                 </section>
 
             </main>
@@ -680,39 +735,42 @@ body.presenter-mode .presenter {
             <span class="hx-brand"><i class="hx-mark"></i>Heads-Up</span>
             <span>01 · The problem</span>
         </header>
-        <div class="hx-head">
-            <p class="hx-eyebrow reveal" style="--d:.05s">Where the value lands vs. where it is needed</p>
-            <h2 class="hx-title reveal" style="--d:.15s">Ansel’s notes arrive <em>6&nbsp;minutes</em> after the meeting. Light users need them <em>7&nbsp;days later.</em></h2>
+        <p class="hx-kicker reveal" style="--d:.05s">Where the value lands vs. where it’s needed</p>
+        <h2 class="hx-title reveal" style="--d:.15s"><span class="t1">Ansel’s notes arrive <em>6&nbsp;minutes</em> after the meeting.</span> <span class="t2">Light users need them <em>7&nbsp;days later.</em></span></h2>
+        <div class="hx-hero">
+            <div class="h-a reveal" style="--d:.45s"><span class="h-fig"><span class="n" data-to="6" data-delay="450">6</span><span class="u"> min</span></span><span class="h-cap">Summary lands after the meeting</span></div>
+            <div class="h-arrow reveal" style="--d:.7s"><i></i></div>
+            <div class="h-b reveal" style="--d:.9s"><span class="h-fig"><span class="n" data-to="7" data-delay="900">7</span><span class="u"> days</span><small> later</small></span><span class="h-cap">Until a light user needs it again, and by then the email is buried.</span></div>
         </div>
         <div class="hx-tl reveal" style="--d:.3s">
             <div class="hx-days">
                 <span style="--x:0">Mon</span><span style="--x:.142857">Tue</span><span style="--x:.285714">Wed</span>
                 <span style="--x:.428571">Thu</span><span style="--x:.571429">Fri</span><span style="--x:.714286">Sat</span>
-                <span style="--x:.857143">Sun</span><span style="--x:1" class="next">Mon (next)</span>
+                <span style="--x:.857143">Sun</span><span style="--x:1" class="next">Mon</span>
             </div>
             <div class="hx-row">
                 <div class="hx-label"><b>Heavy user</b><small>15+ meetings a week</small></div>
-                <div class="hx-track" data-heavy><i class="hx-line"></i><span class="hx-note">6.2 Ansel sessions a week</span></div>
+                <div class="hx-track" data-heavy><i class="hx-line"></i><span class="hx-note">6.2 sessions a week</span></div>
             </div>
             <div class="hx-row">
-                <div class="hx-label"><b>Light user</b><small>Under 5 meetings a week</small></div>
+                <div class="hx-label"><b>Light user</b><small>Under 5 a week</small></div>
                 <div class="hx-track">
                     <i class="hx-line"></i>
-                    <span class="hx-gap">7 days · 0.4 Ansel sessions a week · the notes get buried</span>
+                    <span class="hx-gap">0.4 Ansel sessions a week · the notes get buried</span>
                     <span class="hx-sync" style="--x:0; --d:.5s">Sync</span>
-                    <span class="hx-need" style="--x:.955"></span>
+                    <span class="hx-need" style="--x:.95"></span>
                     <span class="hx-sync" style="--x:1; --d:1.6s">Sync</span>
                 </div>
             </div>
             <div class="hx-annot">
-                <span class="a-land">↑ Value lands: summary arrives ~6 min after the meeting</span>
-                <span class="a-need">Need peaks: minutes before the next sync ↑</span>
+                <span class="a-land">↑ Value lands ~6 min after</span>
+                <span class="a-need">Need peaks right before ↑</span>
             </div>
         </div>
         <div class="hx-stats">
-            <div class="hx-stat reveal" style="--d:1.2s"><span class="hx-num" data-to="34" data-suffix="%" data-delay="1200">34%</span><p>of meeting summaries are ever opened by attendees</p><small>Case Ex 5</small></div>
-            <div class="hx-stat reveal" style="--d:1.35s"><span class="hx-num" data-to="22" data-suffix="s" data-delay="1350">22s</span><p>average time spent reading a summary</p><small>Case Ex 5</small></div>
-            <div class="hx-stat reveal" style="--d:1.5s"><span class="hx-num" data-to="6" data-suffix="%" data-delay="1500">6%</span><p>of extracted action items get marked complete</p><small>Case Ex 5</small></div>
+            <div class="hx-stat reveal" style="--d:1.2s"><span class="hx-num" data-to="34" data-suffix="%" data-delay="1200">34%</span><p>of summaries are ever opened by attendees</p><small>Case Ex 5</small></div>
+            <div class="hx-stat reveal" style="--d:1.35s"><span class="hx-num" data-to="22" data-suffix="s" data-delay="1350">22s</span><p>average time spent reading one</p><small>Case Ex 5</small></div>
+            <div class="hx-stat reveal" style="--d:1.5s"><span class="hx-num" data-to="6" data-suffix="%" data-delay="1500">6%</span><p>of action items ever get marked done</p><small>Case Ex 5</small></div>
         </div>
         <footer class="hx-foot"><span>Source: Kilts Center Ansel case (2026), Exhibits 3 and 5</span><span>02</span></footer>
     </div>
